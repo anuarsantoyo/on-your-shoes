@@ -1,44 +1,39 @@
 # On Your Shoes
 
-An immersive experience that invites players to step into the shoes of a refugee.
+Step into the shoes of a refugee. An interactive experience that uses the tools of narrative and game design to generate empathy and awareness — the opposite of how media often uses them.
 
-The goal is simple and human: help people feel the difficulties refugees face, one step at a time. Instead of reading facts about displacement, you live a small part of it. Every choice, every delay, every closed door carries weight, and the journey is about the person making it, not the statistics.
+## Why
 
-## The Idea
+Movies, news, and media are routinely used to glorify war and make us insensitive to its human cost. On Your Shoes inverts that: it uses the same tools — narrative, pacing, tension, spectacle — to re-sensitize people to what refugees actually went through. Most people did not leave home for pleasure; they left out of need.
 
-"On Your Shoes" is a narrative-driven experience. You take on the journey of someone forced to leave home and try to reach safety. The experience focuses on the human moments along the way:
+## The idea
 
-- The decisions made with little time and less information.
-- The uncertainty of not knowing what comes next.
-- The small kindnesses and the constant obstacles.
-- The tiredness of a road that keeps going.
+Collect as many real journeys as possible: people who tried to reach Germany, and people who made it or did not.
 
-The experience is meant to build empathy. There is no score to win and no enemy to defeat. The point is to understand what the steps cost.
+Each journey is decomposed into states (a place and situation: a camp, a border, a smuggler's boat) connected by actions (paid a smuggler, crossed a river, was detained). Because real journeys overlap — the same camp, the same border crossing — merging all journeys produces a single graph of states and actions. Every node and every edge in that graph is grounded in someone's real experience.
 
-## How It Plays
+The game sits on top of that graph:
 
-The core of the experience is a series of steps. Each step is a moment of the journey, and the player moves through them with limited resources, limited clarity, and limited control. Progress is not guaranteed, and that is the lesson. The player feels the difficulty rather than being told about it.
+1. The player starts at the shared origin.
+2. An LLM narrates the situation; the player makes free-form decisions.
+3. Each decision is mapped onto a real edge in the graph, moving the player from state to state — without the player seeing the graph, and without knowing they are tracing real lives.
+4. The run ends in a terminal state: Germany, death, prison, being stuck.
+5. At the end, the game reveals the real people whose journeys the player crossed, showing that every step was lived by someone real.
 
-## Getting Started
+The goal is replayability as a kind of puzzle (can you find a way to Germany?) and, through repetition, the realization that it is far harder than people assume.
 
-This project is set up with a Python virtual environment.
+## A note on whose story this is
 
-Activate the environment:
+This project does not presume to understand the real struggles of refugees. It starts from the belief that only the people directly affected have the right to decide how their stories are told. The plan is therefore to build a working draft, and if it works, to involve people directly affected by the topic and let them decide the best approach.
 
-```bash
-source venv/bin/activate
-```
+## Approach
 
-Deactivate it when you are done:
+1. Gather public stories (anonymized).
+2. Segment each journey into states and actions.
+3. Merge them into a single graph.
+4. Build the game engine connecting the graph to an LLM (FastAPI).
+5. Make it playable via Streamlit (or similar) to simulate a deployment.
 
-```bash
-deactivate
-```
+## Status
 
-## Project Status
-
-Early stage. The vision and purpose are set, and the experience is being built out step by step.
-
-## Why This Project
-
-Behind every headline about refugees there is a person with a name, a home they did not want to leave, and a road they never planned to walk. This project tries to make that real, if only for a few minutes, so that the next story we read is harder to look away from.
+Early stage. Current work is a test run of the full pipeline using anonymized placeholder content.
