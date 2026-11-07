@@ -1,5 +1,5 @@
 {
-  "count": 26,
+  "count": 33,
   "journeys": [
     {
       "id": "j001",
@@ -311,6 +311,90 @@
       "terminal_outcome": "germany",
       "source_type": "news_interview",
       "language": "ar",
+      "first_person": true
+    },
+    {
+      "id": "j027",
+      "origin": "Kobani",
+      "corridor": "balkan",
+      "year": "2015",
+      "age_band": "family",
+      "gender": "family",
+      "terminal_outcome": "death",
+      "source_type": "news_interview",
+      "language": "en",
+      "first_person": false
+    },
+    {
+      "id": "j028",
+      "origin": "Qamishli",
+      "corridor": "balkan",
+      "year": "2015",
+      "age_band": "adult",
+      "gender": "male",
+      "terminal_outcome": "death",
+      "source_type": "news_interview",
+      "language": "en",
+      "first_person": false
+    },
+    {
+      "id": "j029",
+      "origin": "Syria",
+      "corridor": "mediterranean",
+      "year": "2021",
+      "age_band": "teen",
+      "gender": "male",
+      "terminal_outcome": "prison",
+      "source_type": "news_interview",
+      "language": "en",
+      "first_person": true
+    },
+    {
+      "id": "j030",
+      "origin": "Deraa",
+      "corridor": "mediterranean",
+      "year": "2023",
+      "age_band": "20s",
+      "gender": "male",
+      "terminal_outcome": "other",
+      "source_type": "news_interview",
+      "language": "en",
+      "first_person": true
+    },
+    {
+      "id": "j031",
+      "origin": "Syria",
+      "corridor": "mediterranean",
+      "year": "2016",
+      "age_band": "family",
+      "gender": "family",
+      "terminal_outcome": "returned",
+      "source_type": "ngo_report",
+      "language": "en",
+      "first_person": true
+    },
+    {
+      "id": "j032",
+      "origin": "Syria",
+      "corridor": "balkan",
+      "year": "2017",
+      "age_band": "20s",
+      "gender": "female",
+      "terminal_outcome": "stuck",
+      "source_type": "news_interview",
+      "language": "en",
+      "first_person": true
+    },
+    {
+      "id": "j033",
+      "origin": "Syria",
+      "corridor": "balkan",
+      "year": "2016",
+      "age_band": "40s",
+      "gender": "female",
+      "terminal_outcome": "stuck",
+      "source_type": "ngo_report",
+      "language": "en",
       "first_person": true
     }
   ]
