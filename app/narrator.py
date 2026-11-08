@@ -175,8 +175,9 @@ class DeepSeekNarrator(Narrator):
         msg = resp.choices[0].message
         content = msg.content
         print(f"[narrator] model={self.model} content={content!r}", file=sys.stderr)
-        if getattr(msg, "reasoning_content", None):
-            print(f"[narrator] reasoning_content={msg.reasoning_content!r}", file=sys.stderr)
+        rc = getattr(msg, "reasoning_content", None)
+        if rc:
+            print(f"[narrator] reasoning_content={rc!r}", file=sys.stderr)
         if not content or not str(content).strip():
             print(f"[narrator] EMPTY content; full message: {msg!r}", file=sys.stderr)
             return NarratorMessage(text="(The model returned an empty response — see the server log.)")
