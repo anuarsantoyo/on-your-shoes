@@ -16,6 +16,16 @@ class Session:
     def available_actions(self):
         return graph.outgoing_edges(self.current_node_id)
 
+    def _apply_edge(self, edge_id):
+        edge = graph.get_edge(edge_id)
+        self.current_node_id = edge["to_node"]
+        self.path.append(edge["to_node"])
+        self.turns_since_transition = 0
+        node = graph.get_node(self.current_node_id)
+        if node and node["role"] == "terminal":
+            self.ended = True
+        return edge
+
     def apply_transition(self, edge_id):
         """Advance along an edge if and only if it is real and leaves the current node.
 
@@ -24,10 +34,21 @@ class Session:
         edge = graph.get_edge(edge_id)
         if edge is None or edge["from_node"] != self.current_node_id:
             return None
-        self.current_node_id = edge["to_node"]
-        self.path.append(edge["to_node"])
-        self.turns_since_transition = 0
-        node = graph.get_node(self.current_node_id)
-        if node and node["role"] == "terminal":
-            self.ended = True
-        return edge
+        return self._apply_edge(edge_id)
+
+    def advance_to_decision(self):
+        """Auto-advance through one-way (out-degree 1) nodes until a decision or terminal.
+
+        Returns the corridor as a list of {"action_type", "to_place"} for each
+        auto-followed edge (empty if already at a decision/terminal).
+        """
+        corridor = []
+        while True:
+            edges = self.available_actions()
+            if len(edges) != 1:
+                break
+            edge = self._apply_edge(edges[0]["id"])
+            to_node = graph.get_node(edge["to_node"])
+            corridor.append({"action_type": edge["action_type"],
+                             "to_place": to_node["place"] if to_node else edge["to_node"]})
+        return corridor

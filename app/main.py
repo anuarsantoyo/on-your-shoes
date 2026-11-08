@@ -42,10 +42,11 @@ def graph_view():
 def create_session():
     origin = graph.random_origin()
     s = Session(origin)
-    resp = narrator.start(origin)
+    corridor = s.advance_to_decision()
+    text = narrator.open(s, origin, corridor)
     SESSIONS[s.session_id] = s
-    return {"session_id": s.session_id, "scene": graph.node_label(origin),
-            "narration": resp.text, "ended": False}
+    return {"session_id": s.session_id, "scene": graph.node_label(s.current_node_id),
+            "narration": text, "ended": s.ended}
 
 
 @app.post("/sessions/{sid}/message")
@@ -55,7 +56,7 @@ def send_message(sid: str, body: MessageIn):
         raise HTTPException(404, "no such session")
     s.history.append({"role": "user", "content": body.message})
     s.turns_since_transition += 1
-    resp = narrator.respond(s)
+    resp = narrator.decide(s)
 
     if isinstance(resp, NarratorTransition):
         edge = s.apply_transition(resp.edge_id)
@@ -64,8 +65,10 @@ def send_message(sid: str, body: MessageIn):
             text = resp.narration or "That path is not open to you right now."
             s.history.append({"role": "assistant", "content": text})
             return {"narration": text, "scene": graph.node_label(s.current_node_id), "ended": s.ended}
-        s.history.append({"role": "assistant", "content": resp.narration})
-        return {"narration": resp.narration, "scene": graph.node_label(s.current_node_id), "ended": s.ended}
+        corridor = s.advance_to_decision()
+        text = narrator.narrate_move(s, edge, corridor)
+        s.history.append({"role": "assistant", "content": text})
+        return {"narration": text, "scene": graph.node_label(s.current_node_id), "ended": s.ended}
 
     text = resp.text
     s.history.append({"role": "assistant", "content": text})
