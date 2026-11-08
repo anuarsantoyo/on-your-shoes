@@ -34,6 +34,28 @@ This project does not presume to understand the real struggles of refugees. It s
 4. Build the experience engine connecting the graph to an LLM (FastAPI).
 5. Make it interactive via Streamlit (or similar) to simulate a deployment.
 
+## Setup
+
+Dependencies: FastAPI, Uvicorn, the OpenAI Python client, Pydantic, python-dotenv.
+
+    pip install -r requirements.txt
+
+The graph is generated from JSON. If `graph.db` is missing, rebuild it:
+
+    python3 scripts/build_db.py
+
+For the real narrator, copy the env template and add your DeepSeek key:
+
+    cp .env.example .env
+
+then set `OPENAI_API_KEY` in `.env`. Without a key the app runs in scripted mode (a deterministic stand-in narrator), so the whole loop works either way.
+
+## How to run
+
+    uvicorn app.main:app --reload
+
+Open http://localhost:8000 in a browser. Click "Begin" to start a journey, type what you'd do, and read the narration. When a journey ends, the reveal shows the real journeys your path crossed.
+
 ## Status
 
 Early stage. Current work is a test run of the full pipeline using anonymized placeholder content.

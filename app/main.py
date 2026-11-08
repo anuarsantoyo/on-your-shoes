@@ -13,6 +13,10 @@ from .engine import Session
 from .models import MessageIn, NarratorTransition
 from .narrator import get_narrator
 
+from dotenv import load_dotenv
+
+load_dotenv()  # read .env (OPENAI_API_KEY, OPENAI_BASE_URL, MODEL) before get_narrator()
+
 app = FastAPI(title="On Your Shoes")
 SESSIONS = {}
 narrator = get_narrator()
