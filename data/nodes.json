@@ -1,0 +1,546 @@
+[
+  {
+    "id": "damascus",
+    "place": "Damascus",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Damascus — origin"
+  },
+  {
+    "id": "aleppo",
+    "place": "Aleppo",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Aleppo — origin"
+  },
+  {
+    "id": "yarmouk",
+    "place": "Yarmouk (Damascus)",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Yarmouk (Damascus) — origin"
+  },
+  {
+    "id": "hama",
+    "place": "Hama",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Hama — origin"
+  },
+  {
+    "id": "kobani",
+    "place": "Kobani",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Kobani — origin"
+  },
+  {
+    "id": "qamishli",
+    "place": "Qamishli",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Qamishli — origin"
+  },
+  {
+    "id": "daraa",
+    "place": "Deraa",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Deraa — origin"
+  },
+  {
+    "id": "ras_alein",
+    "place": "Ras al-Ein",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Ras al-Ein — origin"
+  },
+  {
+    "id": "qalamoun",
+    "place": "Qalamoun region",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Qalamoun region — origin"
+  },
+  {
+    "id": "darayya",
+    "place": "Darayya (Damascus suburb)",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Darayya (Damascus suburb) — origin"
+  },
+  {
+    "id": "damascus_countryside",
+    "place": "Damascus countryside",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Damascus countryside — origin"
+  },
+  {
+    "id": "syria",
+    "place": "Syria (unspecified)",
+    "country": "Syria",
+    "role": "origin",
+    "terminal_type": null,
+    "description": "Syria (unspecified) — origin"
+  },
+  {
+    "id": "idlib",
+    "place": "Idlib",
+    "country": "Syria",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Idlib — transit"
+  },
+  {
+    "id": "manbij",
+    "place": "Manbij",
+    "country": "Syria",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Manbij — transit"
+  },
+  {
+    "id": "raqqa",
+    "place": "Raqqa",
+    "country": "Syria",
+    "role": "detention",
+    "terminal_type": null,
+    "description": "Raqqa — detention"
+  },
+  {
+    "id": "syria_turkey_border",
+    "place": "Syria-Turkey border",
+    "country": "Syria",
+    "role": "border",
+    "terminal_type": null,
+    "description": "Syria-Turkey border — border"
+  },
+  {
+    "id": "dubai",
+    "place": "Dubai",
+    "country": "UAE",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Dubai — transit"
+  },
+  {
+    "id": "jordan",
+    "place": "Jordan",
+    "country": "Jordan",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Jordan — transit"
+  },
+  {
+    "id": "zaatari",
+    "place": "Zaatari camp",
+    "country": "Jordan",
+    "role": "camp",
+    "terminal_type": null,
+    "description": "Zaatari camp — camp"
+  },
+  {
+    "id": "sudan",
+    "place": "Sudan",
+    "country": "Sudan",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Sudan — transit"
+  },
+  {
+    "id": "egypt",
+    "place": "Egypt",
+    "country": "Egypt",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Egypt — transit"
+  },
+  {
+    "id": "libya",
+    "place": "Libya",
+    "country": "Libya",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Libya — transit"
+  },
+  {
+    "id": "libya_detention",
+    "place": "Libya (detention centers)",
+    "country": "Libya",
+    "role": "detention",
+    "terminal_type": null,
+    "description": "Libya (detention centers) — detention"
+  },
+  {
+    "id": "italy",
+    "place": "Italy",
+    "country": "Italy",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Italy — arrival"
+  },
+  {
+    "id": "irbil",
+    "place": "Irbil",
+    "country": "Iraq",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Irbil — transit"
+  },
+  {
+    "id": "minsk",
+    "place": "Minsk",
+    "country": "Belarus",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Minsk — transit"
+  },
+  {
+    "id": "poland",
+    "place": "Poland",
+    "country": "Poland",
+    "role": "border",
+    "terminal_type": null,
+    "description": "Poland — border"
+  },
+  {
+    "id": "istanbul",
+    "place": "Istanbul",
+    "country": "Turkey",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Istanbul — transit"
+  },
+  {
+    "id": "izmir",
+    "place": "Izmir",
+    "country": "Turkey",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Izmir — transit"
+  },
+  {
+    "id": "antakya",
+    "place": "Antakya (Hatay)",
+    "country": "Turkey",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Antakya (Hatay) — transit"
+  },
+  {
+    "id": "didim",
+    "place": "Didim",
+    "country": "Turkey",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Didim — transit"
+  },
+  {
+    "id": "bodrum",
+    "place": "Bodrum",
+    "country": "Turkey",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Bodrum — transit"
+  },
+  {
+    "id": "gaziantep",
+    "place": "Gaziantep",
+    "country": "Turkey",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Gaziantep — transit"
+  },
+  {
+    "id": "urfa",
+    "place": "Urfa",
+    "country": "Turkey",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Urfa — transit"
+  },
+  {
+    "id": "turkey",
+    "place": "Turkey (unspecified)",
+    "country": "Turkey",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Turkey (unspecified) — transit"
+  },
+  {
+    "id": "aegean_sea",
+    "place": "Aegean Sea",
+    "country": "Aegean Sea",
+    "role": "sea_crossing",
+    "terminal_type": null,
+    "description": "Aegean Sea — sea_crossing"
+  },
+  {
+    "id": "lesbos",
+    "place": "Lesbos",
+    "country": "Greece",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Lesbos — arrival"
+  },
+  {
+    "id": "kos",
+    "place": "Kos",
+    "country": "Greece",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Kos — arrival"
+  },
+  {
+    "id": "samos",
+    "place": "Samos",
+    "country": "Greece",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Samos — arrival"
+  },
+  {
+    "id": "agathonissi",
+    "place": "Agathonissi",
+    "country": "Greece",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Agathonissi — arrival"
+  },
+  {
+    "id": "farmakonisi",
+    "place": "Farmakonisi",
+    "country": "Greece",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Farmakonisi — arrival"
+  },
+  {
+    "id": "leros",
+    "place": "Leros",
+    "country": "Greece",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Leros — arrival"
+  },
+  {
+    "id": "nera",
+    "place": "Nera",
+    "country": "Greece",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Nera — arrival"
+  },
+  {
+    "id": "greek_island",
+    "place": "Greek island (unspecified)",
+    "country": "Greece",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Greek island (unspecified) — arrival"
+  },
+  {
+    "id": "athens",
+    "place": "Athens",
+    "country": "Greece",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Athens — transit"
+  },
+  {
+    "id": "thessaloniki",
+    "place": "Thessaloniki",
+    "country": "Greece",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Thessaloniki — transit"
+  },
+  {
+    "id": "macedonia",
+    "place": "Macedonia",
+    "country": "North Macedonia",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Macedonia — transit"
+  },
+  {
+    "id": "serbia_border",
+    "place": "Serbia border (Presevo)",
+    "country": "Serbia",
+    "role": "border",
+    "terminal_type": null,
+    "description": "Serbia border (Presevo) — border"
+  },
+  {
+    "id": "serbia",
+    "place": "Serbia",
+    "country": "Serbia",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Serbia — transit"
+  },
+  {
+    "id": "belgrade",
+    "place": "Belgrade",
+    "country": "Serbia",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Belgrade — transit"
+  },
+  {
+    "id": "bulgaria",
+    "place": "Bulgaria",
+    "country": "Bulgaria",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Bulgaria — transit"
+  },
+  {
+    "id": "croatia",
+    "place": "Croatia",
+    "country": "Croatia",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Croatia — transit"
+  },
+  {
+    "id": "slovenia",
+    "place": "Slovenia",
+    "country": "Slovenia",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Slovenia — transit"
+  },
+  {
+    "id": "hungary_border",
+    "place": "Hungary border",
+    "country": "Hungary",
+    "role": "border",
+    "terminal_type": null,
+    "description": "Hungary border — border"
+  },
+  {
+    "id": "hungary",
+    "place": "Hungary",
+    "country": "Hungary",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Hungary — transit"
+  },
+  {
+    "id": "budapest",
+    "place": "Budapest",
+    "country": "Hungary",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Budapest — transit"
+  },
+  {
+    "id": "austria",
+    "place": "Austria",
+    "country": "Austria",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Austria — transit"
+  },
+  {
+    "id": "vienna",
+    "place": "Vienna",
+    "country": "Austria",
+    "role": "transit",
+    "terminal_type": null,
+    "description": "Vienna — transit"
+  },
+  {
+    "id": "germany_border",
+    "place": "Germany border",
+    "country": "Germany",
+    "role": "border",
+    "terminal_type": null,
+    "description": "Germany border — border"
+  },
+  {
+    "id": "munich",
+    "place": "Munich",
+    "country": "Germany",
+    "role": "arrival",
+    "terminal_type": null,
+    "description": "Munich — arrival"
+  },
+  {
+    "id": "germany_arrived",
+    "place": "Germany (arrived, asylum granted/tolerated)",
+    "country": "Germany",
+    "role": "terminal",
+    "terminal_type": "arrived_granted",
+    "description": "Germany (arrived, asylum granted/tolerated) — terminal"
+  },
+  {
+    "id": "germany_rejected",
+    "place": "Germany (asylum rejected)",
+    "country": "Germany",
+    "role": "terminal",
+    "terminal_type": "arrived_rejected",
+    "description": "Germany (asylum rejected) — terminal"
+  },
+  {
+    "id": "death_aegean",
+    "place": "Died in the Aegean (drowning)",
+    "country": "Aegean Sea",
+    "role": "terminal",
+    "terminal_type": "death",
+    "description": "Died in the Aegean (drowning) — terminal"
+  },
+  {
+    "id": "death_truck",
+    "place": "Died in a smuggler's truck (suffocation)",
+    "country": "Austria",
+    "role": "terminal",
+    "terminal_type": "death",
+    "description": "Died in a smuggler's truck (suffocation) — terminal"
+  },
+  {
+    "id": "prison_libya",
+    "place": "Libyan prison / detention",
+    "country": "Libya",
+    "role": "terminal",
+    "terminal_type": "prison",
+    "description": "Libyan prison / detention — terminal"
+  },
+  {
+    "id": "returned_turkey",
+    "place": "Forcibly returned to Turkey",
+    "country": "Turkey",
+    "role": "terminal",
+    "terminal_type": "returned",
+    "description": "Forcibly returned to Turkey — terminal"
+  },
+  {
+    "id": "stuck_lesbos",
+    "place": "Stuck in Lesbos",
+    "country": "Greece",
+    "role": "terminal",
+    "terminal_type": "stuck",
+    "description": "Stuck in Lesbos — terminal"
+  },
+  {
+    "id": "rescued_sea",
+    "place": "Rescued at sea",
+    "country": "Mediterranean Sea",
+    "role": "terminal",
+    "terminal_type": "other",
+    "description": "Rescued at sea — terminal"
+  }
+]

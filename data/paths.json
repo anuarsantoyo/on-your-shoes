@@ -1,0 +1,1147 @@
+[
+  {
+    "journey_id": "j001",
+    "steps": [
+      {
+        "node_id": "damascus",
+        "edge_id": "damascus__dubai__flee"
+      },
+      {
+        "node_id": "dubai",
+        "edge_id": "dubai__turkey__relocate"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__greek_island__reach_shore"
+      },
+      {
+        "node_id": "greek_island",
+        "edge_id": "greek_island__hungary__travel"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__budapest__travel"
+      },
+      {
+        "node_id": "budapest",
+        "edge_id": "budapest__austria__take_train"
+      },
+      {
+        "node_id": "austria",
+        "edge_id": "austria__munich__walk"
+      },
+      {
+        "node_id": "munich",
+        "edge_id": "munich__germany_arrived__arrive"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j002",
+    "steps": [
+      {
+        "node_id": "yarmouk",
+        "edge_id": "yarmouk__hama__smuggle"
+      },
+      {
+        "node_id": "hama",
+        "edge_id": "hama__idlib__smuggle"
+      },
+      {
+        "node_id": "idlib",
+        "edge_id": "idlib__syria_turkey_border__cross_border"
+      },
+      {
+        "node_id": "syria_turkey_border",
+        "edge_id": "syria_turkey_border__syria_turkey_border__retry"
+      },
+      {
+        "node_id": "syria_turkey_border",
+        "edge_id": "syria_turkey_border__antakya__cross_border"
+      },
+      {
+        "node_id": "antakya",
+        "edge_id": "antakya__izmir__take_bus"
+      },
+      {
+        "node_id": "izmir",
+        "edge_id": "izmir__didim__travel"
+      },
+      {
+        "node_id": "didim",
+        "edge_id": "didim__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__farmakonisi__reach_shore"
+      },
+      {
+        "node_id": "farmakonisi",
+        "edge_id": "farmakonisi__leros__travel"
+      },
+      {
+        "node_id": "leros",
+        "edge_id": "leros__athens__take_ferry"
+      },
+      {
+        "node_id": "athens",
+        "edge_id": "athens__macedonia__take_bus"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia__take_train"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__croatia__take_train"
+      },
+      {
+        "node_id": "croatia",
+        "edge_id": "croatia__slovenia__take_train"
+      },
+      {
+        "node_id": "slovenia",
+        "edge_id": "slovenia__austria__travel"
+      },
+      {
+        "node_id": "austria",
+        "edge_id": "austria__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j003",
+    "steps": [
+      {
+        "node_id": "damascus",
+        "edge_id": "damascus__istanbul__flee"
+      },
+      {
+        "node_id": "istanbul",
+        "edge_id": "istanbul__izmir__travel"
+      },
+      {
+        "node_id": "izmir",
+        "edge_id": "izmir__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__kos__reach_shore"
+      },
+      {
+        "node_id": "kos",
+        "edge_id": "kos__athens__take_ferry"
+      },
+      {
+        "node_id": "athens",
+        "edge_id": "athens__macedonia__take_bus"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia_border__take_train"
+      },
+      {
+        "node_id": "serbia_border",
+        "edge_id": "serbia_border__belgrade__take_bus"
+      },
+      {
+        "node_id": "belgrade",
+        "edge_id": "belgrade__hungary_border__cross_border"
+      },
+      {
+        "node_id": "hungary_border",
+        "edge_id": "hungary_border__hungary_border__retry"
+      },
+      {
+        "node_id": "hungary_border",
+        "edge_id": "hungary_border__hungary__cross_border"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__budapest__take_taxi"
+      },
+      {
+        "node_id": "budapest",
+        "edge_id": "budapest__germany_border__take_taxi"
+      },
+      {
+        "node_id": "germany_border",
+        "edge_id": "germany_border__germany_arrived__walk"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j004",
+    "steps": [
+      {
+        "node_id": "damascus_countryside",
+        "edge_id": "damascus_countryside__zaatari__flee"
+      },
+      {
+        "node_id": "zaatari",
+        "edge_id": "zaatari__turkey__travel"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__macedonia__travel"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia__cross_border"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__hungary__travel"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j005",
+    "steps": [
+      {
+        "node_id": "syria",
+        "edge_id": "syria__jordan__flee"
+      },
+      {
+        "node_id": "jordan",
+        "edge_id": "jordan__turkey__relocate"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__izmir__relocate"
+      },
+      {
+        "node_id": "izmir",
+        "edge_id": "izmir__macedonia__walk"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia__walk"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__hungary__walk"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__germany_arrived__walk"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j006",
+    "steps": [
+      {
+        "node_id": "damascus",
+        "edge_id": "damascus__istanbul__flee"
+      },
+      {
+        "node_id": "istanbul",
+        "edge_id": "istanbul__izmir__travel"
+      },
+      {
+        "node_id": "izmir",
+        "edge_id": "izmir__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__lesbos__reach_shore"
+      },
+      {
+        "node_id": "lesbos",
+        "edge_id": "lesbos__macedonia__travel"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia__travel"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__hungary__travel"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j007",
+    "steps": [
+      {
+        "node_id": "hama",
+        "edge_id": "hama__damascus__relocate"
+      },
+      {
+        "node_id": "damascus",
+        "edge_id": "damascus__sudan__flee"
+      },
+      {
+        "node_id": "sudan",
+        "edge_id": "sudan__egypt__travel"
+      },
+      {
+        "node_id": "egypt",
+        "edge_id": "egypt__libya__travel"
+      },
+      {
+        "node_id": "libya",
+        "edge_id": "libya__italy__sea_crossing"
+      },
+      {
+        "node_id": "italy",
+        "edge_id": "italy__austria__travel"
+      },
+      {
+        "node_id": "austria",
+        "edge_id": "austria__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j008",
+    "steps": [
+      {
+        "node_id": "aleppo",
+        "edge_id": "aleppo__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__lesbos__reach_shore"
+      },
+      {
+        "node_id": "lesbos",
+        "edge_id": "lesbos__hungary__travel"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j009",
+    "steps": [
+      {
+        "node_id": "aleppo",
+        "edge_id": "aleppo__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__germany_arrived__take_truck"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j010",
+    "steps": [
+      {
+        "node_id": "aleppo",
+        "edge_id": "aleppo__hungary__flee"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j011",
+    "steps": [
+      {
+        "node_id": "yarmouk",
+        "edge_id": "yarmouk__damascus__relocate"
+      },
+      {
+        "node_id": "damascus",
+        "edge_id": "damascus__manbij__smuggle"
+      },
+      {
+        "node_id": "manbij",
+        "edge_id": "manbij__turkey__cross_border"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j012",
+    "steps": [
+      {
+        "node_id": "ras_alein",
+        "edge_id": "ras_alein__raqqa__get_caught"
+      },
+      {
+        "node_id": "raqqa",
+        "edge_id": "raqqa__istanbul__flee"
+      },
+      {
+        "node_id": "istanbul",
+        "edge_id": "istanbul__gaziantep__relocate"
+      },
+      {
+        "node_id": "gaziantep",
+        "edge_id": "gaziantep__urfa__relocate"
+      },
+      {
+        "node_id": "urfa",
+        "edge_id": "urfa__istanbul__relocate"
+      },
+      {
+        "node_id": "istanbul",
+        "edge_id": "istanbul__izmir__travel"
+      },
+      {
+        "node_id": "izmir",
+        "edge_id": "izmir__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__greek_island__reach_shore"
+      },
+      {
+        "node_id": "greek_island",
+        "edge_id": "greek_island__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j013",
+    "steps": [
+      {
+        "node_id": "istanbul",
+        "edge_id": "istanbul__izmir__travel"
+      },
+      {
+        "node_id": "izmir",
+        "edge_id": "izmir__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__greek_island__reach_shore"
+      },
+      {
+        "node_id": "greek_island",
+        "edge_id": "greek_island__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j014",
+    "steps": [
+      {
+        "node_id": "nera",
+        "edge_id": "nera__kos__travel"
+      },
+      {
+        "node_id": "kos",
+        "edge_id": "kos__athens__take_ferry"
+      },
+      {
+        "node_id": "athens",
+        "edge_id": "athens__macedonia__take_bus"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia_border__take_train"
+      },
+      {
+        "node_id": "serbia_border",
+        "edge_id": "serbia_border__croatia__travel"
+      },
+      {
+        "node_id": "croatia",
+        "edge_id": "croatia__hungary__take_train"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__vienna__take_train"
+      },
+      {
+        "node_id": "vienna",
+        "edge_id": "vienna__germany_arrived__take_train"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j015",
+    "steps": [
+      {
+        "node_id": "darayya",
+        "edge_id": "darayya__budapest__smuggle"
+      },
+      {
+        "node_id": "budapest",
+        "edge_id": "budapest__munich__take_truck"
+      },
+      {
+        "node_id": "munich",
+        "edge_id": "munich__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j016",
+    "steps": [
+      {
+        "node_id": "qalamoun",
+        "edge_id": "qalamoun__idlib__take_bus"
+      },
+      {
+        "node_id": "idlib",
+        "edge_id": "idlib__turkey__cross_border"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__samos__rescued"
+      },
+      {
+        "node_id": "samos",
+        "edge_id": "samos__athens__take_ferry"
+      },
+      {
+        "node_id": "athens",
+        "edge_id": "athens__serbia_border__travel"
+      },
+      {
+        "node_id": "serbia_border",
+        "edge_id": "serbia_border__hungary__travel"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__vienna__take_taxi"
+      },
+      {
+        "node_id": "vienna",
+        "edge_id": "vienna__germany_arrived__take_train"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j017",
+    "steps": [
+      {
+        "node_id": "aleppo",
+        "edge_id": "aleppo__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__agathonissi__reach_shore"
+      },
+      {
+        "node_id": "agathonissi",
+        "edge_id": "agathonissi__samos__take_ferry"
+      },
+      {
+        "node_id": "samos",
+        "edge_id": "samos__athens__take_ferry"
+      },
+      {
+        "node_id": "athens",
+        "edge_id": "athens__thessaloniki__take_train"
+      },
+      {
+        "node_id": "thessaloniki",
+        "edge_id": "thessaloniki__macedonia__cross_border"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__macedonia__retry"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia__cross_border"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__belgrade__travel"
+      },
+      {
+        "node_id": "belgrade",
+        "edge_id": "belgrade__hungary_border__travel"
+      },
+      {
+        "node_id": "hungary_border",
+        "edge_id": "hungary_border__budapest__cross_border"
+      },
+      {
+        "node_id": "budapest",
+        "edge_id": "budapest__germany_border__take_taxi"
+      },
+      {
+        "node_id": "germany_border",
+        "edge_id": "germany_border__germany_arrived__walk"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j018",
+    "steps": [
+      {
+        "node_id": "aleppo",
+        "edge_id": "aleppo__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__agathonissi__reach_shore"
+      },
+      {
+        "node_id": "agathonissi",
+        "edge_id": "agathonissi__samos__take_ferry"
+      },
+      {
+        "node_id": "samos",
+        "edge_id": "samos__athens__take_ferry"
+      },
+      {
+        "node_id": "athens",
+        "edge_id": "athens__thessaloniki__take_train"
+      },
+      {
+        "node_id": "thessaloniki",
+        "edge_id": "thessaloniki__macedonia__cross_border"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__macedonia__retry"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia__cross_border"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__belgrade__travel"
+      },
+      {
+        "node_id": "belgrade",
+        "edge_id": "belgrade__hungary_border__travel"
+      },
+      {
+        "node_id": "hungary_border",
+        "edge_id": "hungary_border__budapest__cross_border"
+      },
+      {
+        "node_id": "budapest",
+        "edge_id": "budapest__germany_border__take_taxi"
+      },
+      {
+        "node_id": "germany_border",
+        "edge_id": "germany_border__germany_arrived__walk"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j019",
+    "steps": [
+      {
+        "node_id": "syria",
+        "edge_id": "syria__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__athens__travel"
+      },
+      {
+        "node_id": "athens",
+        "edge_id": "athens__athens__retry"
+      },
+      {
+        "node_id": "athens",
+        "edge_id": "athens__macedonia__cross_border"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia__travel"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__serbia__retry"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__hungary__cross_border"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__austria__travel"
+      },
+      {
+        "node_id": "austria",
+        "edge_id": "austria__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j020",
+    "steps": [
+      {
+        "node_id": "aleppo",
+        "edge_id": "aleppo__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__izmir__travel"
+      },
+      {
+        "node_id": "izmir",
+        "edge_id": "izmir__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__greek_island__rescued"
+      },
+      {
+        "node_id": "greek_island",
+        "edge_id": "greek_island__athens__take_ferry"
+      },
+      {
+        "node_id": "athens",
+        "edge_id": "athens__macedonia__take_bus"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia__cross_border"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__hungary_border__get_caught"
+      },
+      {
+        "node_id": "hungary_border",
+        "edge_id": "hungary_border__vienna__take_taxi"
+      },
+      {
+        "node_id": "vienna",
+        "edge_id": "vienna__germany_arrived__take_train"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j021",
+    "steps": [
+      {
+        "node_id": "syria",
+        "edge_id": "syria__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__lesbos__reach_shore"
+      },
+      {
+        "node_id": "lesbos",
+        "edge_id": "lesbos__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j022",
+    "steps": [
+      {
+        "node_id": "syria",
+        "edge_id": "syria__irbil__travel"
+      },
+      {
+        "node_id": "irbil",
+        "edge_id": "irbil__minsk__travel"
+      },
+      {
+        "node_id": "minsk",
+        "edge_id": "minsk__poland__cross_border"
+      },
+      {
+        "node_id": "poland",
+        "edge_id": "poland__poland__retry"
+      },
+      {
+        "node_id": "poland",
+        "edge_id": "poland__germany_arrived__cross_border"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j023",
+    "steps": [
+      {
+        "node_id": "aleppo",
+        "edge_id": "aleppo__aegean_sea__flee"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__stuck_lesbos__reach_shore"
+      },
+      {
+        "node_id": "stuck_lesbos",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j024",
+    "steps": [
+      {
+        "node_id": "damascus_countryside",
+        "edge_id": "damascus_countryside__serbia__flee"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__macedonia__travel"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__bulgaria__travel"
+      },
+      {
+        "node_id": "bulgaria",
+        "edge_id": "bulgaria__croatia__travel"
+      },
+      {
+        "node_id": "croatia",
+        "edge_id": "croatia__austria__travel"
+      },
+      {
+        "node_id": "austria",
+        "edge_id": "austria__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j025",
+    "steps": [
+      {
+        "node_id": "aleppo",
+        "edge_id": "aleppo__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__greek_island__reach_shore"
+      },
+      {
+        "node_id": "greek_island",
+        "edge_id": "greek_island__macedonia__travel"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__germany_arrived__travel"
+      },
+      {
+        "node_id": "germany_arrived",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j026",
+    "steps": [
+      {
+        "node_id": "syria",
+        "edge_id": "syria__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__greek_island__travel"
+      },
+      {
+        "node_id": "greek_island",
+        "edge_id": "greek_island__macedonia__travel"
+      },
+      {
+        "node_id": "macedonia",
+        "edge_id": "macedonia__serbia__cross_border"
+      },
+      {
+        "node_id": "serbia",
+        "edge_id": "serbia__hungary_border__cross_border"
+      },
+      {
+        "node_id": "hungary_border",
+        "edge_id": "hungary_border__germany_rejected__cross_border"
+      },
+      {
+        "node_id": "germany_rejected",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j027",
+    "steps": [
+      {
+        "node_id": "kobani",
+        "edge_id": "kobani__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__turkey__retry"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__izmir__travel"
+      },
+      {
+        "node_id": "izmir",
+        "edge_id": "izmir__bodrum__travel"
+      },
+      {
+        "node_id": "bodrum",
+        "edge_id": "bodrum__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__death_aegean__drown"
+      },
+      {
+        "node_id": "death_aegean",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j028",
+    "steps": [
+      {
+        "node_id": "qamishli",
+        "edge_id": "qamishli__hungary__flee"
+      },
+      {
+        "node_id": "hungary",
+        "edge_id": "hungary__death_truck__take_truck"
+      },
+      {
+        "node_id": "death_truck",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j029",
+    "steps": [
+      {
+        "node_id": "syria",
+        "edge_id": "syria__libya__flee"
+      },
+      {
+        "node_id": "libya",
+        "edge_id": "libya__prison_libya__get_caught"
+      },
+      {
+        "node_id": "prison_libya",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j030",
+    "steps": [
+      {
+        "node_id": "daraa",
+        "edge_id": "daraa__libya_detention__flee"
+      },
+      {
+        "node_id": "libya_detention",
+        "edge_id": "libya_detention__rescued_sea__rescued"
+      },
+      {
+        "node_id": "rescued_sea",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j031",
+    "steps": [
+      {
+        "node_id": "syria",
+        "edge_id": "syria__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__leros__rescued"
+      },
+      {
+        "node_id": "leros",
+        "edge_id": "leros__kos__travel"
+      },
+      {
+        "node_id": "kos",
+        "edge_id": "kos__returned_turkey__get_returned"
+      },
+      {
+        "node_id": "returned_turkey",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j032",
+    "steps": [
+      {
+        "node_id": "syria",
+        "edge_id": "syria__izmir__flee"
+      },
+      {
+        "node_id": "izmir",
+        "edge_id": "izmir__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__stuck_lesbos__reach_shore"
+      },
+      {
+        "node_id": "stuck_lesbos",
+        "edge_id": null
+      }
+    ]
+  },
+  {
+    "journey_id": "j033",
+    "steps": [
+      {
+        "node_id": "syria",
+        "edge_id": "syria__turkey__flee"
+      },
+      {
+        "node_id": "turkey",
+        "edge_id": "turkey__aegean_sea__board_boat"
+      },
+      {
+        "node_id": "aegean_sea",
+        "edge_id": "aegean_sea__stuck_lesbos__reach_shore"
+      },
+      {
+        "node_id": "stuck_lesbos",
+        "edge_id": null
+      }
+    ]
+  }
+]

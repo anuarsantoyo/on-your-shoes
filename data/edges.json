@@ -1,0 +1,1003 @@
+[
+  {
+    "id": "damascus__dubai__flee",
+    "from_node": "damascus",
+    "to_node": "dubai",
+    "action_type": "flee",
+    "description": "flee: damascus -> dubai"
+  },
+  {
+    "id": "dubai__turkey__relocate",
+    "from_node": "dubai",
+    "to_node": "turkey",
+    "action_type": "relocate",
+    "description": "relocate: dubai -> turkey"
+  },
+  {
+    "id": "turkey__aegean_sea__board_boat",
+    "from_node": "turkey",
+    "to_node": "aegean_sea",
+    "action_type": "board_boat",
+    "description": "board_boat: turkey -> aegean_sea"
+  },
+  {
+    "id": "aegean_sea__greek_island__reach_shore",
+    "from_node": "aegean_sea",
+    "to_node": "greek_island",
+    "action_type": "reach_shore",
+    "description": "reach_shore: aegean_sea -> greek_island"
+  },
+  {
+    "id": "greek_island__hungary__travel",
+    "from_node": "greek_island",
+    "to_node": "hungary",
+    "action_type": "travel",
+    "description": "travel: greek_island -> hungary"
+  },
+  {
+    "id": "hungary__budapest__travel",
+    "from_node": "hungary",
+    "to_node": "budapest",
+    "action_type": "travel",
+    "description": "travel: hungary -> budapest"
+  },
+  {
+    "id": "budapest__austria__take_train",
+    "from_node": "budapest",
+    "to_node": "austria",
+    "action_type": "take_train",
+    "description": "take_train: budapest -> austria"
+  },
+  {
+    "id": "austria__munich__walk",
+    "from_node": "austria",
+    "to_node": "munich",
+    "action_type": "walk",
+    "description": "walk: austria -> munich"
+  },
+  {
+    "id": "munich__germany_arrived__arrive",
+    "from_node": "munich",
+    "to_node": "germany_arrived",
+    "action_type": "arrive",
+    "description": "arrive: munich -> germany_arrived"
+  },
+  {
+    "id": "yarmouk__hama__smuggle",
+    "from_node": "yarmouk",
+    "to_node": "hama",
+    "action_type": "smuggle",
+    "description": "smuggle: yarmouk -> hama"
+  },
+  {
+    "id": "hama__idlib__smuggle",
+    "from_node": "hama",
+    "to_node": "idlib",
+    "action_type": "smuggle",
+    "description": "smuggle: hama -> idlib"
+  },
+  {
+    "id": "idlib__syria_turkey_border__cross_border",
+    "from_node": "idlib",
+    "to_node": "syria_turkey_border",
+    "action_type": "cross_border",
+    "description": "cross_border: idlib -> syria_turkey_border"
+  },
+  {
+    "id": "syria_turkey_border__syria_turkey_border__retry",
+    "from_node": "syria_turkey_border",
+    "to_node": "syria_turkey_border",
+    "action_type": "retry",
+    "description": "retry: syria_turkey_border -> syria_turkey_border"
+  },
+  {
+    "id": "syria_turkey_border__antakya__cross_border",
+    "from_node": "syria_turkey_border",
+    "to_node": "antakya",
+    "action_type": "cross_border",
+    "description": "cross_border: syria_turkey_border -> antakya"
+  },
+  {
+    "id": "antakya__izmir__take_bus",
+    "from_node": "antakya",
+    "to_node": "izmir",
+    "action_type": "take_bus",
+    "description": "take_bus: antakya -> izmir"
+  },
+  {
+    "id": "izmir__didim__travel",
+    "from_node": "izmir",
+    "to_node": "didim",
+    "action_type": "travel",
+    "description": "travel: izmir -> didim"
+  },
+  {
+    "id": "didim__aegean_sea__board_boat",
+    "from_node": "didim",
+    "to_node": "aegean_sea",
+    "action_type": "board_boat",
+    "description": "board_boat: didim -> aegean_sea"
+  },
+  {
+    "id": "aegean_sea__farmakonisi__reach_shore",
+    "from_node": "aegean_sea",
+    "to_node": "farmakonisi",
+    "action_type": "reach_shore",
+    "description": "reach_shore: aegean_sea -> farmakonisi"
+  },
+  {
+    "id": "farmakonisi__leros__travel",
+    "from_node": "farmakonisi",
+    "to_node": "leros",
+    "action_type": "travel",
+    "description": "travel: farmakonisi -> leros"
+  },
+  {
+    "id": "leros__athens__take_ferry",
+    "from_node": "leros",
+    "to_node": "athens",
+    "action_type": "take_ferry",
+    "description": "take_ferry: leros -> athens"
+  },
+  {
+    "id": "athens__macedonia__take_bus",
+    "from_node": "athens",
+    "to_node": "macedonia",
+    "action_type": "take_bus",
+    "description": "take_bus: athens -> macedonia"
+  },
+  {
+    "id": "macedonia__serbia__take_train",
+    "from_node": "macedonia",
+    "to_node": "serbia",
+    "action_type": "take_train",
+    "description": "take_train: macedonia -> serbia"
+  },
+  {
+    "id": "serbia__croatia__take_train",
+    "from_node": "serbia",
+    "to_node": "croatia",
+    "action_type": "take_train",
+    "description": "take_train: serbia -> croatia"
+  },
+  {
+    "id": "croatia__slovenia__take_train",
+    "from_node": "croatia",
+    "to_node": "slovenia",
+    "action_type": "take_train",
+    "description": "take_train: croatia -> slovenia"
+  },
+  {
+    "id": "slovenia__austria__travel",
+    "from_node": "slovenia",
+    "to_node": "austria",
+    "action_type": "travel",
+    "description": "travel: slovenia -> austria"
+  },
+  {
+    "id": "austria__germany_arrived__travel",
+    "from_node": "austria",
+    "to_node": "germany_arrived",
+    "action_type": "travel",
+    "description": "travel: austria -> germany_arrived"
+  },
+  {
+    "id": "damascus__istanbul__flee",
+    "from_node": "damascus",
+    "to_node": "istanbul",
+    "action_type": "flee",
+    "description": "flee: damascus -> istanbul"
+  },
+  {
+    "id": "istanbul__izmir__travel",
+    "from_node": "istanbul",
+    "to_node": "izmir",
+    "action_type": "travel",
+    "description": "travel: istanbul -> izmir"
+  },
+  {
+    "id": "izmir__aegean_sea__board_boat",
+    "from_node": "izmir",
+    "to_node": "aegean_sea",
+    "action_type": "board_boat",
+    "description": "board_boat: izmir -> aegean_sea"
+  },
+  {
+    "id": "aegean_sea__kos__reach_shore",
+    "from_node": "aegean_sea",
+    "to_node": "kos",
+    "action_type": "reach_shore",
+    "description": "reach_shore: aegean_sea -> kos"
+  },
+  {
+    "id": "kos__athens__take_ferry",
+    "from_node": "kos",
+    "to_node": "athens",
+    "action_type": "take_ferry",
+    "description": "take_ferry: kos -> athens"
+  },
+  {
+    "id": "macedonia__serbia_border__take_train",
+    "from_node": "macedonia",
+    "to_node": "serbia_border",
+    "action_type": "take_train",
+    "description": "take_train: macedonia -> serbia_border"
+  },
+  {
+    "id": "serbia_border__belgrade__take_bus",
+    "from_node": "serbia_border",
+    "to_node": "belgrade",
+    "action_type": "take_bus",
+    "description": "take_bus: serbia_border -> belgrade"
+  },
+  {
+    "id": "belgrade__hungary_border__cross_border",
+    "from_node": "belgrade",
+    "to_node": "hungary_border",
+    "action_type": "cross_border",
+    "description": "cross_border: belgrade -> hungary_border"
+  },
+  {
+    "id": "hungary_border__hungary_border__retry",
+    "from_node": "hungary_border",
+    "to_node": "hungary_border",
+    "action_type": "retry",
+    "description": "retry: hungary_border -> hungary_border"
+  },
+  {
+    "id": "hungary_border__hungary__cross_border",
+    "from_node": "hungary_border",
+    "to_node": "hungary",
+    "action_type": "cross_border",
+    "description": "cross_border: hungary_border -> hungary"
+  },
+  {
+    "id": "hungary__budapest__take_taxi",
+    "from_node": "hungary",
+    "to_node": "budapest",
+    "action_type": "take_taxi",
+    "description": "take_taxi: hungary -> budapest"
+  },
+  {
+    "id": "budapest__germany_border__take_taxi",
+    "from_node": "budapest",
+    "to_node": "germany_border",
+    "action_type": "take_taxi",
+    "description": "take_taxi: budapest -> germany_border"
+  },
+  {
+    "id": "germany_border__germany_arrived__walk",
+    "from_node": "germany_border",
+    "to_node": "germany_arrived",
+    "action_type": "walk",
+    "description": "walk: germany_border -> germany_arrived"
+  },
+  {
+    "id": "damascus_countryside__zaatari__flee",
+    "from_node": "damascus_countryside",
+    "to_node": "zaatari",
+    "action_type": "flee",
+    "description": "flee: damascus_countryside -> zaatari"
+  },
+  {
+    "id": "zaatari__turkey__travel",
+    "from_node": "zaatari",
+    "to_node": "turkey",
+    "action_type": "travel",
+    "description": "travel: zaatari -> turkey"
+  },
+  {
+    "id": "turkey__macedonia__travel",
+    "from_node": "turkey",
+    "to_node": "macedonia",
+    "action_type": "travel",
+    "description": "travel: turkey -> macedonia"
+  },
+  {
+    "id": "macedonia__serbia__cross_border",
+    "from_node": "macedonia",
+    "to_node": "serbia",
+    "action_type": "cross_border",
+    "description": "cross_border: macedonia -> serbia"
+  },
+  {
+    "id": "serbia__hungary__travel",
+    "from_node": "serbia",
+    "to_node": "hungary",
+    "action_type": "travel",
+    "description": "travel: serbia -> hungary"
+  },
+  {
+    "id": "hungary__germany_arrived__travel",
+    "from_node": "hungary",
+    "to_node": "germany_arrived",
+    "action_type": "travel",
+    "description": "travel: hungary -> germany_arrived"
+  },
+  {
+    "id": "syria__jordan__flee",
+    "from_node": "syria",
+    "to_node": "jordan",
+    "action_type": "flee",
+    "description": "flee: syria -> jordan"
+  },
+  {
+    "id": "jordan__turkey__relocate",
+    "from_node": "jordan",
+    "to_node": "turkey",
+    "action_type": "relocate",
+    "description": "relocate: jordan -> turkey"
+  },
+  {
+    "id": "turkey__izmir__relocate",
+    "from_node": "turkey",
+    "to_node": "izmir",
+    "action_type": "relocate",
+    "description": "relocate: turkey -> izmir"
+  },
+  {
+    "id": "izmir__macedonia__walk",
+    "from_node": "izmir",
+    "to_node": "macedonia",
+    "action_type": "walk",
+    "description": "walk: izmir -> macedonia"
+  },
+  {
+    "id": "macedonia__serbia__walk",
+    "from_node": "macedonia",
+    "to_node": "serbia",
+    "action_type": "walk",
+    "description": "walk: macedonia -> serbia"
+  },
+  {
+    "id": "serbia__hungary__walk",
+    "from_node": "serbia",
+    "to_node": "hungary",
+    "action_type": "walk",
+    "description": "walk: serbia -> hungary"
+  },
+  {
+    "id": "hungary__germany_arrived__walk",
+    "from_node": "hungary",
+    "to_node": "germany_arrived",
+    "action_type": "walk",
+    "description": "walk: hungary -> germany_arrived"
+  },
+  {
+    "id": "aegean_sea__lesbos__reach_shore",
+    "from_node": "aegean_sea",
+    "to_node": "lesbos",
+    "action_type": "reach_shore",
+    "description": "reach_shore: aegean_sea -> lesbos"
+  },
+  {
+    "id": "lesbos__macedonia__travel",
+    "from_node": "lesbos",
+    "to_node": "macedonia",
+    "action_type": "travel",
+    "description": "travel: lesbos -> macedonia"
+  },
+  {
+    "id": "macedonia__serbia__travel",
+    "from_node": "macedonia",
+    "to_node": "serbia",
+    "action_type": "travel",
+    "description": "travel: macedonia -> serbia"
+  },
+  {
+    "id": "hama__damascus__relocate",
+    "from_node": "hama",
+    "to_node": "damascus",
+    "action_type": "relocate",
+    "description": "relocate: hama -> damascus"
+  },
+  {
+    "id": "damascus__sudan__flee",
+    "from_node": "damascus",
+    "to_node": "sudan",
+    "action_type": "flee",
+    "description": "flee: damascus -> sudan"
+  },
+  {
+    "id": "sudan__egypt__travel",
+    "from_node": "sudan",
+    "to_node": "egypt",
+    "action_type": "travel",
+    "description": "travel: sudan -> egypt"
+  },
+  {
+    "id": "egypt__libya__travel",
+    "from_node": "egypt",
+    "to_node": "libya",
+    "action_type": "travel",
+    "description": "travel: egypt -> libya"
+  },
+  {
+    "id": "libya__italy__sea_crossing",
+    "from_node": "libya",
+    "to_node": "italy",
+    "action_type": "sea_crossing",
+    "description": "sea_crossing: libya -> italy"
+  },
+  {
+    "id": "italy__austria__travel",
+    "from_node": "italy",
+    "to_node": "austria",
+    "action_type": "travel",
+    "description": "travel: italy -> austria"
+  },
+  {
+    "id": "aleppo__turkey__flee",
+    "from_node": "aleppo",
+    "to_node": "turkey",
+    "action_type": "flee",
+    "description": "flee: aleppo -> turkey"
+  },
+  {
+    "id": "lesbos__hungary__travel",
+    "from_node": "lesbos",
+    "to_node": "hungary",
+    "action_type": "travel",
+    "description": "travel: lesbos -> hungary"
+  },
+  {
+    "id": "turkey__germany_arrived__take_truck",
+    "from_node": "turkey",
+    "to_node": "germany_arrived",
+    "action_type": "take_truck",
+    "description": "take_truck: turkey -> germany_arrived"
+  },
+  {
+    "id": "aleppo__hungary__flee",
+    "from_node": "aleppo",
+    "to_node": "hungary",
+    "action_type": "flee",
+    "description": "flee: aleppo -> hungary"
+  },
+  {
+    "id": "yarmouk__damascus__relocate",
+    "from_node": "yarmouk",
+    "to_node": "damascus",
+    "action_type": "relocate",
+    "description": "relocate: yarmouk -> damascus"
+  },
+  {
+    "id": "damascus__manbij__smuggle",
+    "from_node": "damascus",
+    "to_node": "manbij",
+    "action_type": "smuggle",
+    "description": "smuggle: damascus -> manbij"
+  },
+  {
+    "id": "manbij__turkey__cross_border",
+    "from_node": "manbij",
+    "to_node": "turkey",
+    "action_type": "cross_border",
+    "description": "cross_border: manbij -> turkey"
+  },
+  {
+    "id": "turkey__germany_arrived__travel",
+    "from_node": "turkey",
+    "to_node": "germany_arrived",
+    "action_type": "travel",
+    "description": "travel: turkey -> germany_arrived"
+  },
+  {
+    "id": "ras_alein__raqqa__get_caught",
+    "from_node": "ras_alein",
+    "to_node": "raqqa",
+    "action_type": "get_caught",
+    "description": "get_caught: ras_alein -> raqqa"
+  },
+  {
+    "id": "raqqa__istanbul__flee",
+    "from_node": "raqqa",
+    "to_node": "istanbul",
+    "action_type": "flee",
+    "description": "flee: raqqa -> istanbul"
+  },
+  {
+    "id": "istanbul__gaziantep__relocate",
+    "from_node": "istanbul",
+    "to_node": "gaziantep",
+    "action_type": "relocate",
+    "description": "relocate: istanbul -> gaziantep"
+  },
+  {
+    "id": "gaziantep__urfa__relocate",
+    "from_node": "gaziantep",
+    "to_node": "urfa",
+    "action_type": "relocate",
+    "description": "relocate: gaziantep -> urfa"
+  },
+  {
+    "id": "urfa__istanbul__relocate",
+    "from_node": "urfa",
+    "to_node": "istanbul",
+    "action_type": "relocate",
+    "description": "relocate: urfa -> istanbul"
+  },
+  {
+    "id": "greek_island__germany_arrived__travel",
+    "from_node": "greek_island",
+    "to_node": "germany_arrived",
+    "action_type": "travel",
+    "description": "travel: greek_island -> germany_arrived"
+  },
+  {
+    "id": "nera__kos__travel",
+    "from_node": "nera",
+    "to_node": "kos",
+    "action_type": "travel",
+    "description": "travel: nera -> kos"
+  },
+  {
+    "id": "serbia_border__croatia__travel",
+    "from_node": "serbia_border",
+    "to_node": "croatia",
+    "action_type": "travel",
+    "description": "travel: serbia_border -> croatia"
+  },
+  {
+    "id": "croatia__hungary__take_train",
+    "from_node": "croatia",
+    "to_node": "hungary",
+    "action_type": "take_train",
+    "description": "take_train: croatia -> hungary"
+  },
+  {
+    "id": "hungary__vienna__take_train",
+    "from_node": "hungary",
+    "to_node": "vienna",
+    "action_type": "take_train",
+    "description": "take_train: hungary -> vienna"
+  },
+  {
+    "id": "vienna__germany_arrived__take_train",
+    "from_node": "vienna",
+    "to_node": "germany_arrived",
+    "action_type": "take_train",
+    "description": "take_train: vienna -> germany_arrived"
+  },
+  {
+    "id": "darayya__budapest__smuggle",
+    "from_node": "darayya",
+    "to_node": "budapest",
+    "action_type": "smuggle",
+    "description": "smuggle: darayya -> budapest"
+  },
+  {
+    "id": "budapest__munich__take_truck",
+    "from_node": "budapest",
+    "to_node": "munich",
+    "action_type": "take_truck",
+    "description": "take_truck: budapest -> munich"
+  },
+  {
+    "id": "munich__germany_arrived__travel",
+    "from_node": "munich",
+    "to_node": "germany_arrived",
+    "action_type": "travel",
+    "description": "travel: munich -> germany_arrived"
+  },
+  {
+    "id": "qalamoun__idlib__take_bus",
+    "from_node": "qalamoun",
+    "to_node": "idlib",
+    "action_type": "take_bus",
+    "description": "take_bus: qalamoun -> idlib"
+  },
+  {
+    "id": "idlib__turkey__cross_border",
+    "from_node": "idlib",
+    "to_node": "turkey",
+    "action_type": "cross_border",
+    "description": "cross_border: idlib -> turkey"
+  },
+  {
+    "id": "aegean_sea__samos__rescued",
+    "from_node": "aegean_sea",
+    "to_node": "samos",
+    "action_type": "rescued",
+    "description": "rescued: aegean_sea -> samos"
+  },
+  {
+    "id": "samos__athens__take_ferry",
+    "from_node": "samos",
+    "to_node": "athens",
+    "action_type": "take_ferry",
+    "description": "take_ferry: samos -> athens"
+  },
+  {
+    "id": "athens__serbia_border__travel",
+    "from_node": "athens",
+    "to_node": "serbia_border",
+    "action_type": "travel",
+    "description": "travel: athens -> serbia_border"
+  },
+  {
+    "id": "serbia_border__hungary__travel",
+    "from_node": "serbia_border",
+    "to_node": "hungary",
+    "action_type": "travel",
+    "description": "travel: serbia_border -> hungary"
+  },
+  {
+    "id": "hungary__vienna__take_taxi",
+    "from_node": "hungary",
+    "to_node": "vienna",
+    "action_type": "take_taxi",
+    "description": "take_taxi: hungary -> vienna"
+  },
+  {
+    "id": "aegean_sea__agathonissi__reach_shore",
+    "from_node": "aegean_sea",
+    "to_node": "agathonissi",
+    "action_type": "reach_shore",
+    "description": "reach_shore: aegean_sea -> agathonissi"
+  },
+  {
+    "id": "agathonissi__samos__take_ferry",
+    "from_node": "agathonissi",
+    "to_node": "samos",
+    "action_type": "take_ferry",
+    "description": "take_ferry: agathonissi -> samos"
+  },
+  {
+    "id": "athens__thessaloniki__take_train",
+    "from_node": "athens",
+    "to_node": "thessaloniki",
+    "action_type": "take_train",
+    "description": "take_train: athens -> thessaloniki"
+  },
+  {
+    "id": "thessaloniki__macedonia__cross_border",
+    "from_node": "thessaloniki",
+    "to_node": "macedonia",
+    "action_type": "cross_border",
+    "description": "cross_border: thessaloniki -> macedonia"
+  },
+  {
+    "id": "macedonia__macedonia__retry",
+    "from_node": "macedonia",
+    "to_node": "macedonia",
+    "action_type": "retry",
+    "description": "retry: macedonia -> macedonia"
+  },
+  {
+    "id": "serbia__belgrade__travel",
+    "from_node": "serbia",
+    "to_node": "belgrade",
+    "action_type": "travel",
+    "description": "travel: serbia -> belgrade"
+  },
+  {
+    "id": "belgrade__hungary_border__travel",
+    "from_node": "belgrade",
+    "to_node": "hungary_border",
+    "action_type": "travel",
+    "description": "travel: belgrade -> hungary_border"
+  },
+  {
+    "id": "hungary_border__budapest__cross_border",
+    "from_node": "hungary_border",
+    "to_node": "budapest",
+    "action_type": "cross_border",
+    "description": "cross_border: hungary_border -> budapest"
+  },
+  {
+    "id": "syria__turkey__flee",
+    "from_node": "syria",
+    "to_node": "turkey",
+    "action_type": "flee",
+    "description": "flee: syria -> turkey"
+  },
+  {
+    "id": "turkey__athens__travel",
+    "from_node": "turkey",
+    "to_node": "athens",
+    "action_type": "travel",
+    "description": "travel: turkey -> athens"
+  },
+  {
+    "id": "athens__athens__retry",
+    "from_node": "athens",
+    "to_node": "athens",
+    "action_type": "retry",
+    "description": "retry: athens -> athens"
+  },
+  {
+    "id": "athens__macedonia__cross_border",
+    "from_node": "athens",
+    "to_node": "macedonia",
+    "action_type": "cross_border",
+    "description": "cross_border: athens -> macedonia"
+  },
+  {
+    "id": "serbia__serbia__retry",
+    "from_node": "serbia",
+    "to_node": "serbia",
+    "action_type": "retry",
+    "description": "retry: serbia -> serbia"
+  },
+  {
+    "id": "serbia__hungary__cross_border",
+    "from_node": "serbia",
+    "to_node": "hungary",
+    "action_type": "cross_border",
+    "description": "cross_border: serbia -> hungary"
+  },
+  {
+    "id": "hungary__austria__travel",
+    "from_node": "hungary",
+    "to_node": "austria",
+    "action_type": "travel",
+    "description": "travel: hungary -> austria"
+  },
+  {
+    "id": "turkey__izmir__travel",
+    "from_node": "turkey",
+    "to_node": "izmir",
+    "action_type": "travel",
+    "description": "travel: turkey -> izmir"
+  },
+  {
+    "id": "aegean_sea__greek_island__rescued",
+    "from_node": "aegean_sea",
+    "to_node": "greek_island",
+    "action_type": "rescued",
+    "description": "rescued: aegean_sea -> greek_island"
+  },
+  {
+    "id": "greek_island__athens__take_ferry",
+    "from_node": "greek_island",
+    "to_node": "athens",
+    "action_type": "take_ferry",
+    "description": "take_ferry: greek_island -> athens"
+  },
+  {
+    "id": "serbia__hungary_border__get_caught",
+    "from_node": "serbia",
+    "to_node": "hungary_border",
+    "action_type": "get_caught",
+    "description": "get_caught: serbia -> hungary_border"
+  },
+  {
+    "id": "hungary_border__vienna__take_taxi",
+    "from_node": "hungary_border",
+    "to_node": "vienna",
+    "action_type": "take_taxi",
+    "description": "take_taxi: hungary_border -> vienna"
+  },
+  {
+    "id": "lesbos__germany_arrived__travel",
+    "from_node": "lesbos",
+    "to_node": "germany_arrived",
+    "action_type": "travel",
+    "description": "travel: lesbos -> germany_arrived"
+  },
+  {
+    "id": "syria__irbil__travel",
+    "from_node": "syria",
+    "to_node": "irbil",
+    "action_type": "travel",
+    "description": "travel: syria -> irbil"
+  },
+  {
+    "id": "irbil__minsk__travel",
+    "from_node": "irbil",
+    "to_node": "minsk",
+    "action_type": "travel",
+    "description": "travel: irbil -> minsk"
+  },
+  {
+    "id": "minsk__poland__cross_border",
+    "from_node": "minsk",
+    "to_node": "poland",
+    "action_type": "cross_border",
+    "description": "cross_border: minsk -> poland"
+  },
+  {
+    "id": "poland__poland__retry",
+    "from_node": "poland",
+    "to_node": "poland",
+    "action_type": "retry",
+    "description": "retry: poland -> poland"
+  },
+  {
+    "id": "poland__germany_arrived__cross_border",
+    "from_node": "poland",
+    "to_node": "germany_arrived",
+    "action_type": "cross_border",
+    "description": "cross_border: poland -> germany_arrived"
+  },
+  {
+    "id": "aleppo__aegean_sea__flee",
+    "from_node": "aleppo",
+    "to_node": "aegean_sea",
+    "action_type": "flee",
+    "description": "flee: aleppo -> aegean_sea"
+  },
+  {
+    "id": "aegean_sea__stuck_lesbos__reach_shore",
+    "from_node": "aegean_sea",
+    "to_node": "stuck_lesbos",
+    "action_type": "reach_shore",
+    "description": "reach_shore: aegean_sea -> stuck_lesbos"
+  },
+  {
+    "id": "damascus_countryside__serbia__flee",
+    "from_node": "damascus_countryside",
+    "to_node": "serbia",
+    "action_type": "flee",
+    "description": "flee: damascus_countryside -> serbia"
+  },
+  {
+    "id": "serbia__macedonia__travel",
+    "from_node": "serbia",
+    "to_node": "macedonia",
+    "action_type": "travel",
+    "description": "travel: serbia -> macedonia"
+  },
+  {
+    "id": "macedonia__bulgaria__travel",
+    "from_node": "macedonia",
+    "to_node": "bulgaria",
+    "action_type": "travel",
+    "description": "travel: macedonia -> bulgaria"
+  },
+  {
+    "id": "bulgaria__croatia__travel",
+    "from_node": "bulgaria",
+    "to_node": "croatia",
+    "action_type": "travel",
+    "description": "travel: bulgaria -> croatia"
+  },
+  {
+    "id": "croatia__austria__travel",
+    "from_node": "croatia",
+    "to_node": "austria",
+    "action_type": "travel",
+    "description": "travel: croatia -> austria"
+  },
+  {
+    "id": "greek_island__macedonia__travel",
+    "from_node": "greek_island",
+    "to_node": "macedonia",
+    "action_type": "travel",
+    "description": "travel: greek_island -> macedonia"
+  },
+  {
+    "id": "macedonia__germany_arrived__travel",
+    "from_node": "macedonia",
+    "to_node": "germany_arrived",
+    "action_type": "travel",
+    "description": "travel: macedonia -> germany_arrived"
+  },
+  {
+    "id": "turkey__greek_island__travel",
+    "from_node": "turkey",
+    "to_node": "greek_island",
+    "action_type": "travel",
+    "description": "travel: turkey -> greek_island"
+  },
+  {
+    "id": "serbia__hungary_border__cross_border",
+    "from_node": "serbia",
+    "to_node": "hungary_border",
+    "action_type": "cross_border",
+    "description": "cross_border: serbia -> hungary_border"
+  },
+  {
+    "id": "hungary_border__germany_rejected__cross_border",
+    "from_node": "hungary_border",
+    "to_node": "germany_rejected",
+    "action_type": "cross_border",
+    "description": "cross_border: hungary_border -> germany_rejected"
+  },
+  {
+    "id": "kobani__turkey__flee",
+    "from_node": "kobani",
+    "to_node": "turkey",
+    "action_type": "flee",
+    "description": "flee: kobani -> turkey"
+  },
+  {
+    "id": "turkey__turkey__retry",
+    "from_node": "turkey",
+    "to_node": "turkey",
+    "action_type": "retry",
+    "description": "retry: turkey -> turkey"
+  },
+  {
+    "id": "izmir__bodrum__travel",
+    "from_node": "izmir",
+    "to_node": "bodrum",
+    "action_type": "travel",
+    "description": "travel: izmir -> bodrum"
+  },
+  {
+    "id": "bodrum__aegean_sea__board_boat",
+    "from_node": "bodrum",
+    "to_node": "aegean_sea",
+    "action_type": "board_boat",
+    "description": "board_boat: bodrum -> aegean_sea"
+  },
+  {
+    "id": "aegean_sea__death_aegean__drown",
+    "from_node": "aegean_sea",
+    "to_node": "death_aegean",
+    "action_type": "drown",
+    "description": "drown: aegean_sea -> death_aegean"
+  },
+  {
+    "id": "qamishli__hungary__flee",
+    "from_node": "qamishli",
+    "to_node": "hungary",
+    "action_type": "flee",
+    "description": "flee: qamishli -> hungary"
+  },
+  {
+    "id": "hungary__death_truck__take_truck",
+    "from_node": "hungary",
+    "to_node": "death_truck",
+    "action_type": "take_truck",
+    "description": "take_truck: hungary -> death_truck"
+  },
+  {
+    "id": "syria__libya__flee",
+    "from_node": "syria",
+    "to_node": "libya",
+    "action_type": "flee",
+    "description": "flee: syria -> libya"
+  },
+  {
+    "id": "libya__prison_libya__get_caught",
+    "from_node": "libya",
+    "to_node": "prison_libya",
+    "action_type": "get_caught",
+    "description": "get_caught: libya -> prison_libya"
+  },
+  {
+    "id": "daraa__libya_detention__flee",
+    "from_node": "daraa",
+    "to_node": "libya_detention",
+    "action_type": "flee",
+    "description": "flee: daraa -> libya_detention"
+  },
+  {
+    "id": "libya_detention__rescued_sea__rescued",
+    "from_node": "libya_detention",
+    "to_node": "rescued_sea",
+    "action_type": "rescued",
+    "description": "rescued: libya_detention -> rescued_sea"
+  },
+  {
+    "id": "aegean_sea__leros__rescued",
+    "from_node": "aegean_sea",
+    "to_node": "leros",
+    "action_type": "rescued",
+    "description": "rescued: aegean_sea -> leros"
+  },
+  {
+    "id": "leros__kos__travel",
+    "from_node": "leros",
+    "to_node": "kos",
+    "action_type": "travel",
+    "description": "travel: leros -> kos"
+  },
+  {
+    "id": "kos__returned_turkey__get_returned",
+    "from_node": "kos",
+    "to_node": "returned_turkey",
+    "action_type": "get_returned",
+    "description": "get_returned: kos -> returned_turkey"
+  },
+  {
+    "id": "syria__izmir__flee",
+    "from_node": "syria",
+    "to_node": "izmir",
+    "action_type": "flee",
+    "description": "flee: syria -> izmir"
+  }
+]
