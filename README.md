@@ -14,13 +14,13 @@ Each journey is decomposed into states (a place and situation: a camp, a border,
 
 The experience sits on top of that graph:
 
-1. The player starts at the shared origin.
-2. An LLM narrates the situation; the player makes free-form decisions.
-3. Each decision is mapped onto a real edge in the graph, moving the player from state to state — without the player seeing the graph, and without knowing they are tracing real lives.
-4. The run ends in a terminal state: Germany, death, prison, being stuck.
-5. At the end, the experience reveals the real people whose journeys the player crossed, showing that every step was lived by someone real.
+1. The person starts at the shared origin.
+2. An LLM narrates the situation; the person makes free-form decisions.
+3. Each decision is mapped onto a real edge in the graph, moving the person from state to state — without them seeing the graph, and without knowing they are tracing real lives.
+4. The journey ends in one of several outcomes: reaching Germany, death, imprisonment, or being stuck.
+5. At the end, the experience reveals the real people whose journeys the person crossed, showing that every step was lived by someone real.
 
-The goal is replayability as a kind of puzzle (can you find a way to Germany?) and, through repetition, the realization that it is far harder than people assume.
+It is designed to be experienced more than once. Finding a way to Germany is genuinely difficult, and it is through trying again that the difficulty of the real journeys is felt.
 
 ## A note on whose story this is
 
@@ -32,7 +32,7 @@ This project does not presume to understand the real struggles of refugees. It s
 2. Segment each journey into states and actions.
 3. Merge them into a single graph.
 4. Build the experience engine connecting the graph to an LLM (FastAPI).
-5. Make it playable via Streamlit (or similar) to simulate a deployment.
+5. Make it interactive via Streamlit (or similar) to simulate a deployment.
 
 ## Status
 
