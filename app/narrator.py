@@ -167,15 +167,33 @@ class DeepSeekNarrator(Narrator):
             resp = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
-                response_format={"type": "json_object"},
                 temperature=0.7,
             )
         except Exception as exc:
             print(f"[narrator] LLM call failed: {exc!r}", file=sys.stderr)
             return NarratorMessage(text=f"(The narrator failed: {exc})")
-        content = resp.choices[0].message.content
-        print(f"[narrator] raw ({len(content or '')} chars): {content!r}", file=sys.stderr)
+        msg = resp.choices[0].message
+        content = msg.content
+        print(f"[narrator] model={self.model} content={content!r}", file=sys.stderr)
+        if getattr(msg, "reasoning_content", None):
+            print(f"[narrator] reasoning_content={msg.reasoning_content!r}", file=sys.stderr)
+        if not content or not str(content).strip():
+            print(f"[narrator] EMPTY content; full message: {msg!r}", file=sys.stderr)
+            return NarratorMessage(text="(The model returned an empty response — see the server log.)")
         return self._parse(content)
+
+    @staticmethod
+    def _extract_json(text):
+        t = text.strip()
+        if t.startswith("```"):
+            t = t.strip("`").strip()
+            if t.lower().startswith("json"):
+                t = t[4:].strip()
+        start = t.find("{")
+        end = t.rfind("}")
+        if start == -1 or end < start:
+            return None
+        return t[start:end + 1]
 
     @staticmethod
     def _parse(content):
@@ -184,24 +202,25 @@ class DeepSeekNarrator(Narrator):
         text = str(content).strip()
         if not text:
             return NarratorMessage(text="")
-        # DeepSeek sometimes wraps JSON in markdown fences
-        if text.startswith("```"):
-            text = text.strip("`").strip()
-            if text.lower().startswith("json"):
-                text = text[4:].strip()
-        try:
-            data = json.loads(text)
-        except Exception:
-            print("[narrator] JSON parse failed; using raw text as narration", file=sys.stderr)
-            return NarratorMessage(text=text)
-        if not isinstance(data, dict):
-            return NarratorMessage(text=text)
-        t = data.get("type")
-        if t == "transition":
-            return NarratorTransition(edge_id=data.get("edge_id", ""), narration=data.get("narration", ""))
-        if t == "steer":
-            return NarratorSteer(text=data.get("text", ""))
-        return NarratorMessage(text=data.get("text", ""))
+        candidate = DeepSeekNarrator._extract_json(text)
+        if candidate:
+            try:
+                data = json.loads(candidate)
+            except Exception:
+                data = None
+            if isinstance(data, dict):
+                t = data.get("type")
+                if t == "transition":
+                    return NarratorTransition(edge_id=data.get("edge_id", ""), narration=data.get("narration", ""))
+                if t == "steer":
+                    return NarratorSteer(text=data.get("text", ""))
+                result = NarratorMessage(text=data.get("text", ""))
+                if not result.text.strip():
+                    print(f"[narrator] empty text field; raw: {text!r}", file=sys.stderr)
+                    return NarratorMessage(text=f"(The model returned an empty message: {text})")
+                return result
+        print("[narrator] no JSON found; using raw text as narration", file=sys.stderr)
+        return NarratorMessage(text=text)
 
     @staticmethod
     def _text(resp):
