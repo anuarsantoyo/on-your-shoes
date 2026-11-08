@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On Your Shoes — graph (debug)</title>
+<style>
+  body { margin:0; background:#0e0f12; color:#e8e6e3; font-family: ui-monospace, Menlo, monospace; padding:20px; }
+  h1 { font-size:16px; font-weight:normal; }
+  .legend span { margin-right:16px; font-size:12px; }
+  .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; }
+  #graph svg { max-width:100%; height:auto; }
+</style>
+</head>
+<body>
+<h1>On Your Shoes — full graph (debug view)</h1>
+<p class="legend">
+  <span><i style="background:#c9a06a"></i>origin</span>
+  <span><i style="background:#7d8ca3"></i>transit</span>
+  <span><i style="background:#6ba3c9"></i>arrival</span>
+  <span><i style="background:#c96a6a"></i>border</span>
+  <span><i style="background:#b06ac9"></i>detention</span>
+  <span><i style="background:#4a9bc9"></i>sea crossing</span>
+  <span><i style="background:#6ac98a"></i>terminal</span>
+</p>
+<div id="graph"></div>
+<script>
+const COLORS = { origin:'#c9a06a', transit:'#7d8ca3', arrival:'#6ba3c9', border:'#c96a6a',
+                 detention:'#b06ac9', camp:'#c9a06a', sea_crossing:'#4a9bc9', terminal:'#6ac98a' };
+fetch('/graph').then(r => r.json()).then(g => {
+  const nodes = g.nodes, edges = g.edges;
+  const idx = {}; nodes.forEach((n, i) => idx[n.id] = i);
+  const W = 1400, H = 1400, cx = W/2, cy = H/2, R = 620;
+  const pos = nodes.map((n, i) => {
+    const a = 2*Math.PI*i/nodes.length - Math.PI/2;
+    return [cx + R*Math.cos(a), cy + R*Math.sin(a)];
+  });
+  let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
+  edges.forEach(e => {
+    const [x1,y1] = pos[idx[e.from_node]], [x2,y2] = pos[idx[e.to_node]];
+    svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#2c3038" stroke-width="0.7"/>`;
+  });
+  nodes.forEach((n, i) => {
+    const [x,y] = pos[i];
+    svg += `<circle cx="${x}" cy="${y}" r="6" fill="${COLORS[n.role] || '#888'}"/>`;
+    svg += `<text x="${x}" y="${y-11}" fill="#cfd3da" font-size="10" text-anchor="middle">${n.place}</text>`;
+  });
+  svg += '</svg>';
+  document.getElementById('graph').innerHTML = svg;
+});
+</script>
+</body>
+</html>

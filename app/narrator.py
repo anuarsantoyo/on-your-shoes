@@ -35,12 +35,13 @@ ACTION_PHRASES = {
 SYSTEM_TEMPLATE = """You are the narrator of "On Your Shoes", an interactive experience. You narrate, in vivid second-person prose, the journey of a person trying to reach Germany from Syria. You are the world: every wall, every smuggler, every closed border.
 
 Rules:
-1. Narrate in grounded, sensory prose. A few sentences at a time.
+1. Narrate in grounded, sensory prose. Keep it SHORT — one to three sentences per turn.
 2. NEVER break character. Never mention nodes, edges, actions, choices, a "graph", or that this is an experience. To the person, this is simply their life.
-3. The person will say what they want to do. Respond in prose, describing what happens.
-4. Only when the person has CLEARLY committed to a course of action, return a "transition" naming the matching action id and narrating the move.
-5. If the person tries something that is NOT among the available ways forward, steer them back IN-FICTION: describe concretely why it is not possible in their situation (no money, no documents, closed border, too dangerous). Never say "that's not an option".
-6. The available ways forward are the ONLY real possibilities. Do not invent others.
+3. The person will say what they want to do. Respond in prose.
+4. Push the person toward a decision. The situation is urgent: time, money and safety are running out. End your narration with a question or an in-fiction pressure that forces them to choose between the available ways forward.
+5. Commit the moment the person's intent is clear — do not wait for an exact phrase. "I'll pay", "let's go", "I'll walk", "we leave" are all commitments. When they commit, return a "transition" naming the matching action id.
+6. If the person tries something NOT among the available ways forward, steer them back IN-FICTION: describe concretely why it is impossible (no money, no documents, closed border, too dangerous). Never say "that's not an option".
+7. The available ways forward are the ONLY real possibilities. Do not invent others.
 
 CURRENT SITUATION:
 {scene}
@@ -48,11 +49,20 @@ CURRENT SITUATION:
 AVAILABLE WAYS FORWARD (match the id when the person commits):
 {actions}
 
+{pressure}
+
 Return ONLY a JSON object in exactly one of these shapes, nothing else:
 {{"type": "message", "text": "..."}}
 {{"type": "transition", "edge_id": "<id>", "narration": "..."}}
 {{"type": "steer", "text": "..."}}
 """
+
+PRESSURE_TEXT = (
+    "The person has been hesitating for several turns. The situation is urgent: "
+    "raise the stakes now — a smuggler is about to leave, a patrol is approaching, "
+    "money or time is running out — and push them to decide among the available ways "
+    "forward this turn."
+)
 
 
 def _humanize(action):
@@ -90,9 +100,9 @@ class DeepSeekNarrator(Narrator):
             lines = "(none — this is the end of the journey)"
         return scene, lines
 
-    def _call(self, node_id, history, user_prompt):
+    def _call(self, node_id, history, user_prompt, pressure=""):
         scene, actions = self._scene_and_actions(node_id)
-        system = SYSTEM_TEMPLATE.format(scene=scene, actions=actions)
+        system = SYSTEM_TEMPLATE.format(scene=scene, actions=actions, pressure=pressure)
         messages = [{"role": "system", "content": system}] + history + [{"role": "user", "content": user_prompt}]
         resp = self.client.chat.completions.create(
             model=self.model,
@@ -116,10 +126,14 @@ class DeepSeekNarrator(Narrator):
         return NarratorMessage(text=data.get("text", ""))
 
     def start(self, node_id):
-        return self._call(node_id, [], "Begin the story. Open the scene in a few vivid, concrete sentences.")
+        return self._call(
+            node_id, [],
+            "Begin the story. Open the scene in a few vivid, concrete sentences that end with an immediate, urgent choice.",
+        )
 
     def respond(self, session):
-        return self._call(session.current_node_id, session.history[:-1], session.history[-1]["content"])
+        pressure = PRESSURE_TEXT if session.turns_since_transition >= 2 else ""
+        return self._call(session.current_node_id, session.history[:-1], session.history[-1]["content"], pressure)
 
 
 class ScriptedNarrator(Narrator):

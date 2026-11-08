@@ -71,6 +71,20 @@ def node_label(node_id):
     return f"{n['place']} — {n['country']}"
 
 
+def all_nodes():
+    c = _conn()
+    rows = c.execute("SELECT id, place, country, role, terminal_type FROM nodes").fetchall()
+    c.close()
+    return [dict(id=r[0], place=r[1], country=r[2], role=r[3], terminal_type=r[4]) for r in rows]
+
+
+def all_edges():
+    c = _conn()
+    rows = c.execute("SELECT id, from_node, to_node, action_type FROM edges").fetchall()
+    c.close()
+    return [dict(id=r[0], from_node=r[1], to_node=r[2], action_type=r[3]) for r in rows]
+
+
 def reveal(path_node_ids):
     """Which real journeys overlapped the player's path, and where."""
     c = _conn()

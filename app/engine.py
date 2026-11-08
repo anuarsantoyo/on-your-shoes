@@ -11,6 +11,7 @@ class Session:
         self.path = [node_id]            # ordered node ids visited
         self.history = []                # list of {"role", "content"}
         self.ended = False
+        self.turns_since_transition = 0  # turns elapsed since the last state change
 
     def available_actions(self):
         return graph.outgoing_edges(self.current_node_id)
@@ -25,6 +26,7 @@ class Session:
             return None
         self.current_node_id = edge["to_node"]
         self.path.append(edge["to_node"])
+        self.turns_since_transition = 0
         node = graph.get_node(self.current_node_id)
         if node and node["role"] == "terminal":
             self.ended = True

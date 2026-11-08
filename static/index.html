@@ -11,12 +11,16 @@
   #wrap { max-width:720px; margin:0 auto; padding:28px 20px 140px; }
   header h1 { font-size:22px; font-weight:normal; letter-spacing:.5px; margin:0; }
   header p.sub { color:var(--muted); font-size:14px; margin:6px 0 0; }
+  header .toplinks { margin-top:10px; font-size:13px; }
+  header .toplinks a { color:var(--accent); text-decoration:none; margin-right:16px; }
   #scene { color:var(--accent); font-style:italic; font-size:14px; margin:22px 0 2px; }
   #log { margin-top:6px; }
   .msg { margin:20px 0; line-height:1.75; font-size:17px; }
   .msg.user { color:#c8d3e0; }
-  .msg.user .who { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:1px; }
   .msg.narrator { color:var(--text); }
+  #debug { margin-top:20px; border:1px solid var(--line); border-radius:8px; background:#101216; }
+  #debug summary { cursor:pointer; padding:10px 14px; font-size:13px; color:var(--muted); font-family: ui-monospace, monospace; }
+  #debug pre { margin:0; padding:0 14px 14px; font-size:12px; line-height:1.6; color:#9fb0c3; font-family: ui-monospace, Menlo, monospace; white-space:pre-wrap; }
   #reveal { border-top:1px solid var(--line); margin-top:34px; padding-top:22px; }
   #reveal h2 { font-size:18px; font-weight:normal; color:var(--accent); margin:0 0 4px; }
   #reveal .sub { color:var(--muted); font-size:14px; margin:0 0 16px; }
@@ -36,10 +40,15 @@
   <header>
     <h1>On Your Shoes</h1>
     <p class="sub">An interactive experience built from the real journeys of refugees.</p>
+    <div class="toplinks"><a href="/graph/view" target="_blank">full graph (debug)</a></div>
   </header>
   <button id="begin">Begin</button>
   <div id="scene"></div>
   <div id="log"></div>
+  <details id="debug" open>
+    <summary>debug — current state &amp; allowed actions (remove before release)</summary>
+    <pre id="debuginfo">not started</pre>
+  </details>
   <div id="reveal" style="display:none"></div>
 </div>
 <div id="inputbar" style="display:none">
@@ -57,6 +66,7 @@ const bar = document.getElementById('inputbar');
 const msg = document.getElementById('msg');
 const send = document.getElementById('send');
 const revealEl = document.getElementById('reveal');
+const debugEl = document.getElementById('debuginfo');
 
 function addMsg(text, cls) {
   const d = document.createElement('div');
@@ -72,6 +82,16 @@ async function api(path, opts) {
   return r.json();
 }
 
+async function updateDebug() {
+  if (!sessionId) return;
+  const s = await api('/sessions/'+sessionId+'/state');
+  const acts = s.available_actions.map(a => `${a.id}  ->  ${a.action_type}  ->  ${a.to_place}`).join('\n') || '(none — terminal)';
+  debugEl.textContent =
+    'node: ' + s.current_node_id + '  (turns since move: ' + s.turns_since_transition + ')' + (s.ended ? '  [ENDED]' : '') + '\n' +
+    'path: ' + s.path.join(' -> ') + '\n' +
+    'allowed actions:\n' + acts;
+}
+
 begin.onclick = async () => {
   begin.disabled = true;
   const r = await api('/sessions', {method:'POST'});
@@ -79,6 +99,7 @@ begin.onclick = async () => {
   scene.textContent = r.scene;
   addMsg(r.narration, 'narrator');
   bar.style.display = 'block';
+  await updateDebug();
   msg.focus();
 };
 
@@ -93,6 +114,7 @@ async function sendMsg() {
       {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:text})});
     scene.textContent = r.scene;
     addMsg(r.narration, 'narrator');
+    await updateDebug();
     if (r.ended) await showReveal();
   } catch(e) {
     addMsg('(error: '+e.message+')', 'narrator');

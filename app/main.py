@@ -5,6 +5,7 @@ Play:  http://localhost:8000
 """
 from pathlib import Path
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 
@@ -12,8 +13,6 @@ from . import graph
 from .engine import Session
 from .models import MessageIn, NarratorTransition
 from .narrator import get_narrator
-
-from dotenv import load_dotenv
 
 load_dotenv()  # read .env (OPENAI_API_KEY, OPENAI_BASE_URL, MODEL) before get_narrator()
 
@@ -27,6 +26,16 @@ STATIC = Path(__file__).resolve().parent.parent / "static"
 @app.get("/")
 def index():
     return FileResponse(STATIC / "index.html")
+
+
+@app.get("/graph")
+def get_graph():
+    return {"nodes": graph.all_nodes(), "edges": graph.all_edges()}
+
+
+@app.get("/graph/view")
+def graph_view():
+    return FileResponse(STATIC / "graph.html")
 
 
 @app.post("/sessions")
@@ -45,6 +54,7 @@ def send_message(sid: str, body: MessageIn):
     if not s:
         raise HTTPException(404, "no such session")
     s.history.append({"role": "user", "content": body.message})
+    s.turns_since_transition += 1
     resp = narrator.respond(s)
 
     if isinstance(resp, NarratorTransition):
@@ -69,6 +79,7 @@ def get_state(sid: str):
         raise HTTPException(404, "no such session")
     return {"session_id": s.session_id, "current_node_id": s.current_node_id,
             "available_actions": s.available_actions(), "path": s.path,
+            "turns_since_transition": s.turns_since_transition,
             "history": s.history, "ended": s.ended}
 
 
