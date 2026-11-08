@@ -6,14 +6,14 @@
 <title>On Your Shoes — graph (debug)</title>
 <style>
   body { margin:0; background:#0e0f12; color:#e8e6e3; font-family: ui-monospace, Menlo, monospace; padding:20px; }
-  h1 { font-size:16px; font-weight:normal; }
+  h1 { font-size:16px; font-weight:normal; margin-bottom:4px; }
   .legend span { margin-right:16px; font-size:12px; }
   .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; }
-  #graph svg { max-width:100%; height:auto; }
+  #wrap { overflow-x:auto; }
 </style>
 </head>
 <body>
-<h1>On Your Shoes — full graph (debug view)</h1>
+<h1>On Your Shoes — full graph (top-to-bottom, debug view)</h1>
 <p class="legend">
   <span><i style="background:#c9a06a"></i>origin</span>
   <span><i style="background:#7d8ca3"></i>transit</span>
@@ -23,27 +23,95 @@
   <span><i style="background:#4a9bc9"></i>sea crossing</span>
   <span><i style="background:#6ac98a"></i>terminal</span>
 </p>
-<div id="graph"></div>
+<div id="wrap"><div id="graph"></div></div>
 <script>
 const COLORS = { origin:'#c9a06a', transit:'#7d8ca3', arrival:'#6ba3c9', border:'#c96a6a',
                  detention:'#b06ac9', camp:'#c9a06a', sea_crossing:'#4a9bc9', terminal:'#6ac98a' };
+
+function layout(nodes, edges) {
+  const N = nodes.length;
+  const idx = {}; nodes.forEach((n,i) => idx[n.id] = i);
+  const nonSelf = edges.filter(e => e.from_node !== e.to_node);
+  const adj = Array.from({length:N}, () => []);
+  nonSelf.forEach(e => adj[idx[e.from_node]].push(idx[e.to_node]));
+
+  // DFS back-edge detection (break cycles for a clean top-to-bottom flow)
+  const color = new Array(N).fill(0);
+  const back = new Set();
+  function dfs(u) {
+    color[u] = 1;
+    for (const v of adj[u]) {
+      if (color[v] === 1) back.add(u + ',' + v);
+      else if (color[v] === 0) dfs(v);
+    }
+    color[u] = 2;
+  }
+  for (let i = 0; i < N; i++) if (color[i] === 0) dfs(i);
+
+  // DAG adjacency (skip self-loops and cycle-closing back edges)
+  const dag = Array.from({length:N}, () => []);
+  const indeg = new Array(N).fill(0);
+  nonSelf.forEach(e => {
+    const u = idx[e.from_node], v = idx[e.to_node];
+    if (back.has(u + ',' + v)) return;
+    dag[u].push(v); indeg[v]++;
+  });
+
+  // Kahn topological order; leftover (cycle) nodes appended
+  const q = []; for (let i = 0; i < N; i++) if (indeg[i] === 0) q.push(i);
+  const order = [];
+  while (q.length) { const u = q.shift(); order.push(u); for (const v of dag[u]) if (--indeg[v] === 0) q.push(v); }
+  const seen = new Set(order);
+  for (let i = 0; i < N; i++) if (!seen.has(i)) order.push(i);
+
+  // longest-path rank (layer = deepest position in the flow)
+  const rank = new Array(N).fill(0);
+  order.forEach(u => dag[u].forEach(v => { rank[v] = Math.max(rank[v], rank[u] + 1); }));
+
+  const layers = {};
+  nodes.forEach((n, i) => { const r = rank[i]; (layers[r] = layers[r] || []).push(i); });
+  const maxRank = Math.max(...rank);
+  const layerMax = Math.max(...Object.values(layers).map(l => l.length));
+
+  const vGap = 100, hGap = 150, padX = 150, padY = 60;
+  const W = padX * 2 + (layerMax - 1) * hGap;
+  const H = padY * 2 + maxRank * vGap;
+  const pos = nodes.map(() => [0, 0]);
+  Object.entries(layers).forEach(([r, layer]) => {
+    const y = padY + (+r) * vGap;
+    layer.forEach((i, j) => {
+      const x = padX + j * hGap + (layerMax - layer.length) * hGap / 2;
+      pos[i] = [x, y];
+    });
+  });
+  return { pos, W, H };
+}
+
 fetch('/graph').then(r => r.json()).then(g => {
   const nodes = g.nodes, edges = g.edges;
-  const idx = {}; nodes.forEach((n, i) => idx[n.id] = i);
-  const W = 1400, H = 1400, cx = W/2, cy = H/2, R = 620;
-  const pos = nodes.map((n, i) => {
-    const a = 2*Math.PI*i/nodes.length - Math.PI/2;
-    return [cx + R*Math.cos(a), cy + R*Math.sin(a)];
-  });
+  const idx = {}; nodes.forEach((n,i) => idx[n.id] = i);
+  const { pos, W, H } = layout(nodes, edges);
+
   let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
+  svg += '<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#3a404a"/></marker></defs>';
+
   edges.forEach(e => {
-    const [x1,y1] = pos[idx[e.from_node]], [x2,y2] = pos[idx[e.to_node]];
-    svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#2c3038" stroke-width="0.7"/>`;
+    const [x1, y1] = pos[idx[e.from_node]], [x2, y2] = pos[idx[e.to_node]];
+    if (e.from_node === e.to_node) {
+      // self-loop (a retry): small ring to the upper-right
+      svg += `<circle cx="${x1 + 12}" cy="${y1 - 12}" r="8" fill="none" stroke="#3a404a" stroke-width="1"/>`;
+    } else {
+      svg += `<line x1="${x1}" y1="${y1 + 10}" x2="${x2}" y2="${y2 - 10}" stroke="#3a404a" stroke-width="1" marker-end="url(#arrow)"/>`;
+    }
   });
+
   nodes.forEach((n, i) => {
-    const [x,y] = pos[i];
-    svg += `<circle cx="${x}" cy="${y}" r="6" fill="${COLORS[n.role] || '#888'}"/>`;
-    svg += `<text x="${x}" y="${y-11}" fill="#cfd3da" font-size="10" text-anchor="middle">${n.place}</text>`;
+    const [x, y] = pos[i];
+    svg += `<circle cx="${x}" cy="${y}" r="7" fill="${COLORS[n.role] || '#888'}"/>`;
+    svg += `<text x="${x}" y="${y - 13}" fill="#cfd3da" font-size="10" text-anchor="middle">${n.place}</text>`;
+    if (n.role === 'origin' || n.role === 'terminal') {
+      svg += `<text x="${x}" y="${y + 23}" fill="#8a8f98" font-size="9" text-anchor="middle">${n.role}</text>`;
+    }
   });
   svg += '</svg>';
   document.getElementById('graph').innerHTML = svg;
