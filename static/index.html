@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On Your Shoes</title>
+<style>
+  :root { --bg:#0e0f12; --panel:#16181d; --text:#e8e6e3; --muted:#8a8f98; --accent:#c9a06a; --line:#26292f; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family: Georgia, 'Times New Roman', serif; }
+  #wrap { max-width:720px; margin:0 auto; padding:28px 20px 140px; }
+  header h1 { font-size:22px; font-weight:normal; letter-spacing:.5px; margin:0; }
+  header p.sub { color:var(--muted); font-size:14px; margin:6px 0 0; }
+  #scene { color:var(--accent); font-style:italic; font-size:14px; margin:22px 0 2px; }
+  #log { margin-top:6px; }
+  .msg { margin:20px 0; line-height:1.75; font-size:17px; }
+  .msg.user { color:#c8d3e0; }
+  .msg.user .who { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:1px; }
+  .msg.narrator { color:var(--text); }
+  #reveal { border-top:1px solid var(--line); margin-top:34px; padding-top:22px; }
+  #reveal h2 { font-size:18px; font-weight:normal; color:var(--accent); margin:0 0 4px; }
+  #reveal .sub { color:var(--muted); font-size:14px; margin:0 0 16px; }
+  .reveal-item { margin:14px 0; padding:14px 16px; background:var(--panel); border-radius:8px; font-size:15px; line-height:1.65; }
+  .reveal-item .outcome { color:var(--accent); }
+  .reveal-item .shared { color:var(--muted); font-size:13px; }
+  #inputbar { position:fixed; left:0; right:0; bottom:0; background:var(--bg); border-top:1px solid var(--line); padding:14px 20px; }
+  #inputbar .inner { max-width:720px; margin:0 auto; display:flex; gap:10px; }
+  #msg { flex:1; background:var(--panel); border:1px solid var(--line); color:var(--text); padding:12px 14px; font-size:16px; border-radius:6px; font-family:inherit; }
+  #send, #begin { background:var(--accent); color:#1a1409; border:none; padding:12px 18px; border-radius:6px; cursor:pointer; font-size:15px; font-family:inherit; }
+  #begin { margin-top:18px; }
+  button:disabled { opacity:.5; cursor:default; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <header>
+    <h1>On Your Shoes</h1>
+    <p class="sub">An interactive experience built from the real journeys of refugees.</p>
+  </header>
+  <button id="begin">Begin</button>
+  <div id="scene"></div>
+  <div id="log"></div>
+  <div id="reveal" style="display:none"></div>
+</div>
+<div id="inputbar" style="display:none">
+  <div class="inner">
+    <input id="msg" placeholder="What do you do?" autocomplete="off">
+    <button id="send">Send</button>
+  </div>
+</div>
+<script>
+let sessionId = null;
+const log = document.getElementById('log');
+const scene = document.getElementById('scene');
+const begin = document.getElementById('begin');
+const bar = document.getElementById('inputbar');
+const msg = document.getElementById('msg');
+const send = document.getElementById('send');
+const revealEl = document.getElementById('reveal');
+
+function addMsg(text, cls) {
+  const d = document.createElement('div');
+  d.className = 'msg ' + cls;
+  d.textContent = text;
+  log.appendChild(d);
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+async function api(path, opts) {
+  const r = await fetch(path, opts);
+  if (!r.ok) { const e = await r.json().catch(()=>({detail:r.statusText})); throw new Error(e.detail || r.statusText); }
+  return r.json();
+}
+
+begin.onclick = async () => {
+  begin.disabled = true;
+  const r = await api('/sessions', {method:'POST'});
+  sessionId = r.session_id;
+  scene.textContent = r.scene;
+  addMsg(r.narration, 'narrator');
+  bar.style.display = 'block';
+  msg.focus();
+};
+
+async function sendMsg() {
+  const text = msg.value.trim();
+  if (!text || !sessionId) return;
+  addMsg(text, 'user');
+  msg.value = '';
+  send.disabled = true;
+  try {
+    const r = await api('/sessions/'+sessionId+'/message',
+      {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:text})});
+    scene.textContent = r.scene;
+    addMsg(r.narration, 'narrator');
+    if (r.ended) await showReveal();
+  } catch(e) {
+    addMsg('(error: '+e.message+')', 'narrator');
+  }
+  send.disabled = false;
+}
+
+async function showReveal() {
+  bar.style.display = 'none';
+  const r = await api('/sessions/'+sessionId+'/reveal');
+  revealEl.style.display = 'block';
+  revealEl.innerHTML = '<h2>Your path was walked by real people</h2>' +
+    '<p class="sub">Every step you took was lived by someone real.</p>' +
+    r.journeys.map(j =>
+      '<div class="reveal-item">A person from <b>'+j.origin+'</b> who <span class="outcome">'+j.outcome+'</span>' +
+      '<br><span class="shared">shared with you: '+j.shared_places.join(', ')+'</span></div>'
+    ).join('') +
+    (r.journeys.length === 0 ? '<p class="sub">(no real journey overlapped this path.)</p>' : '');
+}
+
+send.onclick = sendMsg;
+msg.addEventListener('keydown', e => { if (e.key === 'Enter') sendMsg(); });
+</script>
+</body>
+</html>
