@@ -22,6 +22,12 @@ narrator = get_narrator()
 
 STATIC = Path(__file__).resolve().parent.parent / "static"
 
+FALLBACK = "(The narrator returned nothing — check the server log.)"
+
+
+def _safe(text):
+    return text if text and str(text).strip() else FALLBACK
+
 
 @app.get("/")
 def index():
@@ -43,7 +49,8 @@ def create_session():
     origin = graph.random_origin()
     s = Session(origin)
     corridor = s.advance_to_decision()
-    text = narrator.open(s, origin, corridor)
+    text = _safe(narrator.open(s, origin, corridor))
+    s.history.append({"role": "assistant", "content": text})  # keep the opening in history for continuity
     SESSIONS[s.session_id] = s
     return {"session_id": s.session_id, "scene": graph.node_label(s.current_node_id),
             "narration": text, "ended": s.ended}
@@ -62,15 +69,15 @@ def send_message(sid: str, body: MessageIn):
         edge = s.apply_transition(resp.edge_id)
         if edge is None:
             # Hallucinated/invalid edge: never advance, steer instead.
-            text = resp.narration or "That path is not open to you right now."
+            text = _safe(resp.narration or "That path is not open to you right now.")
             s.history.append({"role": "assistant", "content": text})
             return {"narration": text, "scene": graph.node_label(s.current_node_id), "ended": s.ended}
         corridor = s.advance_to_decision()
-        text = narrator.narrate_move(s, edge, corridor)
+        text = _safe(narrator.narrate_move(s, edge, corridor))
         s.history.append({"role": "assistant", "content": text})
         return {"narration": text, "scene": graph.node_label(s.current_node_id), "ended": s.ended}
 
-    text = resp.text
+    text = _safe(resp.text)
     s.history.append({"role": "assistant", "content": text})
     return {"narration": text, "scene": graph.node_label(s.current_node_id), "ended": s.ended}
 

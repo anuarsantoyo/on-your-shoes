@@ -11,6 +11,7 @@ The narrator has three jobs:
 """
 import json
 import os
+import sys
 
 from . import graph
 from .models import NarratorMessage, NarratorTransition, NarratorSteer
@@ -162,20 +163,39 @@ class DeepSeekNarrator(Narrator):
         return "; ".join(f"then {_humanize(c['action_type'])} toward {c['to_place']}" for c in corridor)
 
     def _llm(self, messages):
-        resp = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            response_format={"type": "json_object"},
-            temperature=0.7,
-        )
-        return self._parse(resp.choices[0].message.content)
+        try:
+            resp = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                response_format={"type": "json_object"},
+                temperature=0.7,
+            )
+        except Exception as exc:
+            print(f"[narrator] LLM call failed: {exc!r}", file=sys.stderr)
+            return NarratorMessage(text=f"(The narrator failed: {exc})")
+        content = resp.choices[0].message.content
+        print(f"[narrator] raw ({len(content or '')} chars): {content!r}", file=sys.stderr)
+        return self._parse(content)
 
     @staticmethod
     def _parse(content):
+        if content is None:
+            return NarratorMessage(text="")
+        text = str(content).strip()
+        if not text:
+            return NarratorMessage(text="")
+        # DeepSeek sometimes wraps JSON in markdown fences
+        if text.startswith("```"):
+            text = text.strip("`").strip()
+            if text.lower().startswith("json"):
+                text = text[4:].strip()
         try:
-            data = json.loads(content)
+            data = json.loads(text)
         except Exception:
-            return NarratorMessage(text=content)
+            print("[narrator] JSON parse failed; using raw text as narration", file=sys.stderr)
+            return NarratorMessage(text=text)
+        if not isinstance(data, dict):
+            return NarratorMessage(text=text)
         t = data.get("type")
         if t == "transition":
             return NarratorTransition(edge_id=data.get("edge_id", ""), narration=data.get("narration", ""))
@@ -187,7 +207,7 @@ class DeepSeekNarrator(Narrator):
     def _text(resp):
         if isinstance(resp, NarratorTransition):
             return resp.narration or ""
-        return resp.text
+        return resp.text or ""
 
     def open(self, session, origin_id, corridor):
         origin = graph.get_node(origin_id)
