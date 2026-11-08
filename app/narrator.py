@@ -1,17 +1,21 @@
 """Narrators. The engine never talks to an LLM directly — it talks to a Narrator.
 
-DeepSeekNarrator: the real one (OpenAI-compatible API, DeepSeek).
+DeepSeekNarrator: the real one (OpenAI-compatible API, DeepSeek), using native function
+calling so the model always returns a structured action (narrate / commit / steer).
 ScriptedNarrator: a deterministic stand-in so the whole loop runs with no API key.
 
 The narrator has three jobs:
 - open():          narrate the opening (origin -> corridor -> first decision).
-- decide():        at a decision node, narrate and classify the person's intent
-                   into a message / a committed transition / a steer.
+- decide():        at a decision node, narrate and classify the person's intent.
+                   After FORCE_COMMIT_AFTER turns it is forced to commit.
 - narrate_move():  narrate a committed action + any auto-advanced corridor in one passage.
 """
 import json
 import os
 import sys
+from typing import Any
+
+from pydantic import BaseModel, ValidationError
 
 from . import graph
 from .models import NarratorMessage, NarratorTransition, NarratorSteer
@@ -51,17 +55,76 @@ RULES = (
     "4. The situation is urgent: time, money and safety are running out."
 )
 
+FORCE_COMMIT_AFTER = 3  # turns of deliberation before the narrator is forced to commit
+
+
+# --- Pydantic models for the function-call arguments (structured output) ---
+class NarrateArgs(BaseModel):
+    text: str = ""
+
+
+class CommitArgs(BaseModel):
+    action_id: str
+    narration: str = ""
+
+
+class SteerArgs(BaseModel):
+    text: str = ""
+
+
+# --- Function/tool definitions ---
+NARRATE_TOOL = {
+    "type": "function",
+    "function": {
+        "name": "narrate",
+        "description": "Narrate the situation in second-person prose. Do NOT advance the journey.",
+        "parameters": {
+            "type": "object",
+            "properties": {"text": {"type": "string", "description": "The narration, 1-3 sentences."}},
+            "required": ["text"],
+        },
+    },
+}
+
+COMMIT_TOOL = {
+    "type": "function",
+    "function": {
+        "name": "commit",
+        "description": "The person has committed to a course of action. Advance the journey.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "action_id": {"type": "string", "description": "The id from AVAILABLE WAYS FORWARD."},
+                "narration": {"type": "string", "description": "Optional brief narration of the decision."},
+            },
+            "required": ["action_id"],
+        },
+    },
+}
+
+STEER_TOOL = {
+    "type": "function",
+    "function": {
+        "name": "steer",
+        "description": "The person tried something impossible. Steer them back, in-fiction.",
+        "parameters": {
+            "type": "object",
+            "properties": {"text": {"type": "string", "description": "Why it is impossible, in-fiction, 1-3 sentences."}},
+            "required": ["text"],
+        },
+    },
+}
+
+
 DECIDE_TEMPLATE = PREMISE + """
 
 Rules:
 """ + RULES + """
 
 You are at a moment of decision. Narrate the situation, then respond to what the person says. Push them
-toward a decision; end your narration with a question or an in-fiction pressure that forces them to choose
-among the available ways forward. Commit the moment their intent is clear ("I'll pay", "let's go",
-"I'll walk", "we leave" are all commitments) — return a "transition" naming the matching action id. If they
-try something NOT among the available ways forward, steer them back IN-FICTION: describe concretely why it
-is impossible. Never say "that's not an option".
+toward a decision. Commit the moment their intent is clear ("I'll pay", "let's go", "I'll walk", "we leave"
+are all commitments). If they try something NOT among the available ways forward, steer them back in-fiction:
+describe concretely why it is impossible. Never say "that's not an option".
 
 CURRENT SITUATION:
 {scene}
@@ -70,11 +133,6 @@ AVAILABLE WAYS FORWARD (match the id when the person commits):
 {actions}
 
 {pressure}
-
-Return ONLY a JSON object in exactly one of these shapes, nothing else:
-{{"type": "message", "text": "..."}}
-{{"type": "transition", "edge_id": "<id>"}}
-{{"type": "steer", "text": "..."}}
 """
 
 MOVE_TEMPLATE = PREMISE + """
@@ -84,14 +142,11 @@ Rules:
 
 The person committed to a course of action: {action_text}. Narrate the consequences in ONE continuous
 passage: what happened as they did it, then the road that followed ({corridor_text}), until they arrive at
-{scene}. End the passage at the new scene with a question or an in-fiction pressure that forces them to
-choose among the available ways forward.
+{scene}. End the passage with a question or an in-fiction pressure that forces them to choose among the
+available ways forward.
 
 AVAILABLE WAYS FORWARD (at the new scene):
 {actions}
-
-Return ONLY a JSON object in this shape:
-{{"type": "message", "text": "..."}}
 """
 
 OPEN_TEMPLATE = PREMISE + """
@@ -101,21 +156,16 @@ Rules:
 
 Open the story. The person is in {origin_place}. They have decided to leave. Narrate the departure in ONE
 continuous passage: leaving {origin_place}, then the road that followed ({corridor_text}), until they arrive
-at {scene}. End the passage at the new scene with a question or an in-fiction pressure that forces them to
-choose among the available ways forward.
+at {scene}. End the passage with a question or an in-fiction pressure that forces them to choose among the
+available ways forward.
 
 AVAILABLE WAYS FORWARD (at the new scene):
 {actions}
-
-Return ONLY a JSON object in this shape:
-{{"type": "message", "text": "..."}}
 """
 
-PRESSURE_TEXT = (
-    "The person has been hesitating for several turns. The situation is urgent: "
-    "raise the stakes now — a smuggler is about to leave, a patrol is approaching, "
-    "money or time is running out — and push them to decide among the available ways "
-    "forward this turn."
+FORCE_TEXT = (
+    "The person has had enough time to decide. They must choose NOW. Pick the action that best matches "
+    "their situation and the conversation so far, and commit to it."
 )
 
 
@@ -162,72 +212,57 @@ class DeepSeekNarrator(Narrator):
             return "directly onward"
         return "; ".join(f"then {_humanize(c['action_type'])} toward {c['to_place']}" for c in corridor)
 
-    def _llm(self, messages):
+    def _call_tools(self, messages, tools, tool_choice: Any = "auto"):
         try:
             resp = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
+                tools=tools,
+                tool_choice=tool_choice,
                 temperature=0.7,
             )
         except Exception as exc:
             print(f"[narrator] LLM call failed: {exc!r}", file=sys.stderr)
             return NarratorMessage(text=f"(The narrator failed: {exc})")
         msg = resp.choices[0].message
-        content = msg.content
-        print(f"[narrator] model={self.model} content={content!r}", file=sys.stderr)
-        rc = getattr(msg, "reasoning_content", None)
-        if rc:
-            print(f"[narrator] reasoning_content={rc!r}", file=sys.stderr)
-        if not content or not str(content).strip():
-            print(f"[narrator] EMPTY content; full message: {msg!r}", file=sys.stderr)
-            return NarratorMessage(text="(The model returned an empty response — see the server log.)")
-        return self._parse(content)
-
-    @staticmethod
-    def _extract_json(text):
-        t = text.strip()
-        if t.startswith("```"):
-            t = t.strip("`").strip()
-            if t.lower().startswith("json"):
-                t = t[4:].strip()
-        start = t.find("{")
-        end = t.rfind("}")
-        if start == -1 or end < start:
-            return None
-        return t[start:end + 1]
-
-    @staticmethod
-    def _parse(content):
-        if content is None:
-            return NarratorMessage(text="")
-        text = str(content).strip()
-        if not text:
-            return NarratorMessage(text="")
-        candidate = DeepSeekNarrator._extract_json(text)
-        if candidate:
+        calls = getattr(msg, "tool_calls", None)
+        if not calls:
+            content = msg.content or ""
+            print(f"[narrator] no tool call; content={content!r}", file=sys.stderr)
+            return NarratorMessage(text=str(content).strip())
+        tc = calls[0]
+        name = tc.function.name
+        try:
+            args = json.loads(tc.function.arguments or "{}")
+        except Exception:
+            args = {}
+        print(f"[narrator] tool={name} args={args!r}", file=sys.stderr)
+        if name == "narrate":
             try:
-                data = json.loads(candidate)
-            except Exception:
-                data = None
-            if isinstance(data, dict):
-                t = data.get("type")
-                if t == "transition":
-                    return NarratorTransition(edge_id=data.get("edge_id", ""), narration=data.get("narration", ""))
-                if t == "steer":
-                    return NarratorSteer(text=data.get("text", ""))
-                result = NarratorMessage(text=data.get("text", ""))
-                if not result.text.strip():
-                    print(f"[narrator] empty text field; raw: {text!r}", file=sys.stderr)
-                    return NarratorMessage(text=f"(The model returned an empty message: {text})")
-                return result
-        print("[narrator] no JSON found; using raw text as narration", file=sys.stderr)
-        return NarratorMessage(text=text)
+                return NarratorMessage(text=NarrateArgs.model_validate(args).text)
+            except ValidationError:
+                return NarratorMessage(text="(invalid narrate args)")
+        if name == "commit":
+            try:
+                a = CommitArgs.model_validate(args)
+            except ValidationError as exc:
+                return NarratorMessage(text=f"(invalid commit args: {exc})")
+            return NarratorTransition(edge_id=a.action_id, narration=a.narration)
+        if name == "steer":
+            try:
+                return NarratorSteer(text=SteerArgs.model_validate(args).text)
+            except ValidationError:
+                return NarratorSteer(text="That path is not open to you right now.")
+        return NarratorMessage(text="(unknown tool)")
 
     @staticmethod
     def _text(resp):
         if isinstance(resp, NarratorTransition):
             return resp.narration or ""
         return resp.text or ""
+
+    def _force(self, name):
+        return {"type": "function", "function": {"name": name}}
 
     def open(self, session, origin_id, corridor):
         origin = graph.get_node(origin_id)
@@ -237,17 +272,24 @@ class DeepSeekNarrator(Narrator):
             scene=self._scene(session.current_node_id),
             actions=self._actions_block(session.current_node_id),
         )
-        return self._text(self._llm([{"role": "system", "content": system}, {"role": "user", "content": "Begin."}]))
+        resp = self._call_tools(
+            [{"role": "system", "content": system}, {"role": "user", "content": "Begin."}],
+            [NARRATE_TOOL], self._force("narrate"),
+        )
+        return self._text(resp)
 
     def decide(self, session):
-        pressure = PRESSURE_TEXT if session.turns_since_transition >= 2 else ""
+        forced = session.turns_since_transition >= FORCE_COMMIT_AFTER
+        pressure = FORCE_TEXT if forced else ""
         system = DECIDE_TEMPLATE.format(
             scene=self._scene(session.current_node_id),
             actions=self._actions_block(session.current_node_id),
             pressure=pressure,
         )
         messages = [{"role": "system", "content": system}] + session.history[:-1] + [{"role": "user", "content": session.history[-1]["content"]}]
-        return self._llm(messages)
+        if forced:
+            return self._call_tools(messages, [COMMIT_TOOL], self._force("commit"))
+        return self._call_tools(messages, [NARRATE_TOOL, COMMIT_TOOL, STEER_TOOL], "auto")
 
     def narrate_move(self, session, edge, corridor):
         to_place = graph.get_node(edge["to_node"])["place"]
@@ -257,7 +299,11 @@ class DeepSeekNarrator(Narrator):
             scene=self._scene(session.current_node_id),
             actions=self._actions_block(session.current_node_id),
         )
-        return self._text(self._llm([{"role": "system", "content": system}, {"role": "user", "content": "Continue."}]))
+        resp = self._call_tools(
+            [{"role": "system", "content": system}, {"role": "user", "content": "Continue."}],
+            [NARRATE_TOOL], self._force("narrate"),
+        )
+        return self._text(resp)
 
 
 class ScriptedNarrator(Narrator):
