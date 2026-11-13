@@ -1,5 +1,9 @@
 name: Publish Docker image
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: anuarsantoyo/on-your-shoes
+
 on:
   push:
     branches: [main]
@@ -31,4 +35,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/anuarsantoyo/on-your-shoes:v1
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
