@@ -40,7 +40,9 @@ Dependencies: FastAPI, Uvicorn, the OpenAI Python client, Pydantic, python-doten
 
     pip install -r requirements.txt
 
-The graph is generated from JSON. If `graph.db` is missing, rebuild it:
+The graph is generated from JSON — `graph.db` is a build artifact (gitignored), not committed.
+Rebuild it after pulling new code that changed the data model. If you see a "no such column"
+error or a stale graph, run:
 
     python3 scripts/build_db.py
 
