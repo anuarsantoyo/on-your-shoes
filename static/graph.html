@@ -4,29 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On Your Shoes — graph (debug)</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-  body { margin:0; background:#0e0f12; color:#e8e6e3; font-family: ui-monospace, Menlo, monospace; padding:20px; }
-  h1 { font-size:16px; font-weight:normal; margin-bottom:4px; }
-  .legend span { margin-right:16px; font-size:12px; }
+  html, body { height:100%; margin:0; background:#0e0f12; color:#e8e6e3; font-family: ui-monospace, Menlo, monospace; }
+  body { display:flex; flex-direction:column; padding:0 20px 20px; box-sizing:border-box; }
+  h1 { font-size:16px; font-weight:normal; margin:14px 0 4px; }
+  .legend span { margin-right:14px; font-size:12px; }
   .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; }
   .legend i.bar { width:16px; height:2px; border-radius:0; vertical-align:middle; }
-  #info { font-size:12px; margin:12px 0; min-height:60px; color:#8a8f98; line-height:1.6; }
+  #info { font-size:12px; margin:8px 0; min-height:60px; color:#8a8f98; line-height:1.6; }
   #info .out { color:#e0a860; }
   #info .in  { color:#5aa0d0; }
   #info .id  { color:#5c6169; }
-  #wrap { overflow-x:auto; }
-
-  .edge { stroke:#3a404a; pointer-events:none; transition: stroke .15s ease, opacity .15s ease, stroke-width .15s ease; }
-  .edge.dim  { opacity:.08; }
-  .edge.out  { stroke:#e0a860; stroke-width:2.4; opacity:1; }
-  .edge.in   { stroke:#5aa0d0; stroke-width:2.4; opacity:1; }
-  .edge.self { stroke:#c97ac9; stroke-width:2.4; opacity:1; }
-
-  text { pointer-events:none; }
-  circle.node { pointer-events:all; transition: opacity .15s ease; }
-  circle.node.dim      { opacity:.12; }
-  circle.node.neighbor { stroke:#ffffff; stroke-width:1.6; }
-  circle.node.hovered  { stroke:#ffffff; stroke-width:3; }
+  #map { flex:1; min-height:0; background:#0e0f12; border-radius:6px; }
+  .nlabel {
+    background:transparent !important; border:none !important; box-shadow:none !important;
+    color:#e8e6e3 !important; font-size:9px !important; font-family:ui-monospace,Menlo,monospace !important;
+    text-shadow:0 0 3px #000, 0 0 3px #000;
+  }
 </style>
 </head>
 <body>
@@ -45,110 +40,91 @@
   <span><i class="bar" style="background:#c97ac9"></i>self-loop</span>
 </p>
 <div id="info">Hover a node to see its connections.</div>
-<div id="wrap"><div id="graph"></div></div>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const COLORS = { origin:'#c9a06a', transit:'#7d8ca3', arrival:'#6ba3c9', border:'#c96a6a',
                  detention:'#b06ac9', camp:'#c9a06a', sea_crossing:'#4a9bc9', terminal:'#6ac98a' };
-
-function layout(nodes) {
-  // Geographic layout: project lat/lon with Web Mercator so the routes read as a map.
-  const lons = nodes.map(n => n.lon), lats = nodes.map(n => n.lat);
-  const minLon = Math.min(...lons), maxLon = Math.max(...lons);
-  const maxLat = Math.max(...lats), minLat = Math.min(...lats);
-  const merc = lat => Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360));
-  const xSpan = (maxLon - minLon) * Math.PI / 180;   // radians (radius = 1)
-  const ySpan = merc(maxLat) - merc(minLat);
-  const pad = 60;
-  const targetW = 1500;
-  const scale = targetW / xSpan;
-  const W = targetW + pad * 2;
-  const H = ySpan * scale + pad * 2;
-  const pos = nodes.map(n => [
-    (n.lon - minLon) * Math.PI / 180 * scale + pad,
-    (merc(maxLat) - merc(n.lat)) * scale + pad,
-  ]);
-  return { pos, W, H };
-}
+const EDGE_GRAY = '#8a8f98';
 
 fetch('/graph').then(r => r.json()).then(g => {
   const nodes = g.nodes, edges = g.edges;
   const idx = {}; nodes.forEach((n,i) => idx[n.id] = i);
-  const placeOf = id => { const n = nodes[idx[id]]; return n ? n.place : id; };
+  const placeOf = id => (idx[id] !== undefined) ? nodes[idx[id]].place : id;
 
   // precompute connections (outgoing + incoming) per node
   const conn = {}; nodes.forEach(n => conn[n.id] = { out: [], in: [] });
   edges.forEach(e => { conn[e.from_node].out.push(e); conn[e.to_node].in.push(e); });
 
-  const { pos, W, H } = layout(nodes);
+  const map = L.map('map', { zoomControl: true, attributionControl: true });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
 
-  let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
-  svg += '<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#3a404a"/></marker></defs>';
+  const coord = id => [nodes[idx[id]].lat, nodes[idx[id]].lon];
 
+  // edges (polylines); a self-loop becomes a ring around its node
+  const edgeLayers = [];
   edges.forEach(e => {
-    const [x1, y1] = pos[idx[e.from_node]], [x2, y2] = pos[idx[e.to_node]];
     if (e.from_node === e.to_node) {
-      svg += `<circle class="edge" data-from="${e.from_node}" data-to="${e.to_node}" cx="${x1 + 12}" cy="${y1 - 12}" r="8" fill="none" stroke="#3a404a" stroke-width="1"/>`;
+      const layer = L.circleMarker(coord(e.from_node), { radius: 12, weight: 1.5, color: EDGE_GRAY, fill: false });
+      layer.addTo(map);
+      edgeLayers.push({ from: e.from_node, to: e.to_node, layer, self: true });
     } else {
-      svg += `<line class="edge" data-from="${e.from_node}" data-to="${e.to_node}" x1="${x1}" y1="${y1 + 10}" x2="${x2}" y2="${y2 - 10}" stroke="#3a404a" stroke-width="1" marker-end="url(#arrow)"/>`;
+      const layer = L.polyline([coord(e.from_node), coord(e.to_node)], { color: EDGE_GRAY, weight: 1.5, opacity: 1 });
+      layer.addTo(map);
+      edgeLayers.push({ from: e.from_node, to: e.to_node, layer, self: false });
     }
   });
 
-  nodes.forEach((n, i) => {
-    const [x, y] = pos[i];
-    svg += `<circle class="node" data-id="${n.id}" cx="${x}" cy="${y}" r="8" fill="${COLORS[n.role] || '#888'}" stroke="transparent" stroke-width="14"/>`;
-    svg += `<text x="${x}" y="${y - 13}" fill="#cfd3da" font-size="10" text-anchor="middle">${n.place}</text>`;
-    if (n.role === 'origin' || n.role === 'terminal') {
-      svg += `<text x="${x}" y="${y + 23}" fill="#8a8f98" font-size="9" text-anchor="middle">${n.role}</text>`;
-    }
+  // nodes (circle markers with permanent tiny labels)
+  const nodeMarkers = {};
+  nodes.forEach(n => {
+    const m = L.circleMarker([n.lat, n.lon], {
+      radius: 6, weight: 1, color: '#0e0f12',
+      fillColor: COLORS[n.role] || '#888', fillOpacity: 1,
+    });
+    m.bindTooltip(n.place, { permanent: true, direction: 'top', offset: [0, -8], className: 'nlabel' });
+    m.on('mouseover', () => hover(n.id));
+    m.on('mouseout', reset);
+    m.addTo(map);
+    nodeMarkers[n.id] = m;
   });
-  svg += '</svg>';
-  document.getElementById('graph').innerHTML = svg;
 
-  // hover behaviour
-  const edgeEls = [...document.querySelectorAll('.edge')];
-  const nodeEls = [...document.querySelectorAll('.node')];
   const info = document.getElementById('info');
 
+  function hover(id) {
+    const c = conn[id];
+    edgeLayers.forEach(e => {
+      if (e.self && e.from === id) e.layer.setStyle({ color: '#c97ac9', weight: 3, opacity: 1 });
+      else if (e.from === id) e.layer.setStyle({ color: '#e0a860', weight: 3, opacity: 1 });
+      else if (e.to === id) e.layer.setStyle({ color: '#5aa0d0', weight: 3, opacity: 1 });
+      else e.layer.setStyle({ color: EDGE_GRAY, weight: 1.5, opacity: 0.08 });
+    });
+    const neighbors = new Set();
+    c.out.forEach(e => neighbors.add(e.to_node));
+    c.in.forEach(e => neighbors.add(e.from_node));
+    Object.entries(nodeMarkers).forEach(([nid, m]) => {
+      if (nid === id) m.setStyle({ weight: 3, color: '#ffffff', radius: 9 });
+      else if (neighbors.has(nid)) m.setStyle({ weight: 2, color: '#ffffff' });
+      else m.setStyle({ weight: 1, color: '#0e0f12', fillOpacity: 0.15 });
+    });
+    const out = c.out.map(e => `${e.action_type} → ${placeOf(e.to_node)}`);
+    const inn = c.in.map(e => `${placeOf(e.from_node)} (${e.action_type})`);
+    info.innerHTML =
+      `<b>${placeOf(id)}</b> <span class="id">${id}</span>` +
+      `<br><span class="out">outgoing (${c.out.length})</span>: ${out.join('; ') || '—'}` +
+      `<br><span class="in">incoming (${c.in.length})</span>: ${inn.join('; ') || '—'}`;
+  }
+
   function reset() {
-    edgeEls.forEach(e => e.classList.remove('out', 'in', 'self', 'dim'));
-    nodeEls.forEach(n => n.classList.remove('neighbor', 'dim', 'hovered'));
+    edgeLayers.forEach(e => e.layer.setStyle({ color: EDGE_GRAY, weight: 1.5, opacity: 1 }));
+    Object.values(nodeMarkers).forEach(m => m.setStyle({ weight: 1, color: '#0e0f12', fillOpacity: 1 }));
     info.innerHTML = 'Hover a node to see its connections.';
   }
 
-  nodeEls.forEach(node => {
-    const id = node.dataset.id;
-    node.addEventListener('mouseenter', () => {
-      const c = conn[id];
-      // edges: color by direction relative to this node
-      edgeEls.forEach(e => {
-        const f = e.dataset.from, t = e.dataset.to;
-        e.classList.remove('out', 'in', 'self', 'dim');
-        if (f === id && t === id) e.classList.add('self');
-        else if (f === id) e.classList.add('out');
-        else if (t === id) e.classList.add('in');
-        else e.classList.add('dim');
-      });
-      // nodes: ring the neighbours, dim the rest
-      const neighbors = new Set();
-      c.out.forEach(e => neighbors.add(e.to_node));
-      c.in.forEach(e => neighbors.add(e.from_node));
-      nodeEls.forEach(n => {
-        const nid = n.dataset.id;
-        n.classList.remove('neighbor', 'dim', 'hovered');
-        if (nid === id) n.classList.add('hovered');
-        else if (neighbors.has(nid)) n.classList.add('neighbor');
-        else n.classList.add('dim');
-      });
-      // info panel
-      const out = c.out.map(e => `${e.action_type} → ${placeOf(e.to_node)}`);
-      const inn = c.in.map(e => `${placeOf(e.from_node)} (${e.action_type})`);
-      info.innerHTML =
-        `<b>${placeOf(id)}</b> <span class="id">${id}</span>` +
-        `<br><span class="out">outgoing (${c.out.length})</span>: ${out.join('; ') || '—'}` +
-        `<br><span class="in">incoming (${c.in.length})</span>: ${inn.join('; ') || '—'}`;
-    });
-    node.addEventListener('mouseleave', reset);
-  });
+  map.fitBounds(L.latLngBounds(nodes.map(n => [n.lat, n.lon])).pad(0.1));
 });
 </script>
 </body>
