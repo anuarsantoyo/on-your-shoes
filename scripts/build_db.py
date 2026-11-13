@@ -50,7 +50,9 @@ CREATE TABLE nodes (
     country TEXT,
     role TEXT,
     terminal_type TEXT,
-    description TEXT
+    description TEXT,
+    lat REAL,
+    lon REAL
 );
 
 CREATE TABLE edges (
@@ -120,9 +122,9 @@ def build() -> None:
     if nodes is not None:
         for n in nodes:
             c.execute(
-                "INSERT INTO nodes (id, place, country, role, terminal_type, description) VALUES (?,?,?,?,?,?)",
+                "INSERT INTO nodes (id, place, country, role, terminal_type, description, lat, lon) VALUES (?,?,?,?,?,?,?,?)",
                 (n["id"], n.get("place"), n.get("country"), n.get("role"),
-                 n.get("terminal_type"), n.get("description")),
+                 n.get("terminal_type"), n.get("description"), n.get("lat"), n.get("lon")),
             )
 
     # --- edges (phase 2, optional) ---

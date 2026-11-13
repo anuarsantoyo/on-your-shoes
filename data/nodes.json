@@ -5,7 +5,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Damascus — origin"
+    "description": "Damascus — origin",
+    "lat": 33.51307,
+    "lon": 36.30958
   },
   {
     "id": "aleppo",
@@ -13,7 +15,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Aleppo — origin"
+    "description": "Aleppo — origin",
+    "lat": 36.19924,
+    "lon": 37.16373
   },
   {
     "id": "yarmouk",
@@ -21,7 +25,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Yarmouk (Damascus) — origin"
+    "description": "Yarmouk (Damascus) — origin",
+    "lat": 33.47248,
+    "lon": 36.3048
   },
   {
     "id": "hama",
@@ -29,7 +35,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Hama — origin"
+    "description": "Hama — origin",
+    "lat": 35.13434,
+    "lon": 36.74963
   },
   {
     "id": "kobani",
@@ -37,7 +45,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Kobani — origin"
+    "description": "Kobani — origin",
+    "lat": 36.88998,
+    "lon": 38.35424
   },
   {
     "id": "qamishli",
@@ -45,7 +55,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Qamishli — origin"
+    "description": "Qamishli — origin",
+    "lat": 37.04959,
+    "lon": 41.23065
   },
   {
     "id": "daraa",
@@ -53,7 +65,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Deraa — origin"
+    "description": "Deraa — origin",
+    "lat": 32.62278,
+    "lon": 36.10676
   },
   {
     "id": "ras_alein",
@@ -61,7 +75,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Ras al-Ein — origin"
+    "description": "Ras al-Ein — origin",
+    "lat": 36.85038,
+    "lon": 40.06955
   },
   {
     "id": "qalamoun",
@@ -69,7 +85,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Qalamoun region — origin"
+    "description": "Qalamoun region — origin",
+    "lat": 34.02342,
+    "lon": 36.7335
   },
   {
     "id": "darayya",
@@ -77,7 +95,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Darayya (Damascus suburb) — origin"
+    "description": "Darayya (Damascus suburb) — origin",
+    "lat": 33.45879,
+    "lon": 36.23885
   },
   {
     "id": "damascus_countryside",
@@ -85,7 +105,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Damascus countryside — origin"
+    "description": "Damascus countryside — origin",
+    "lat": 33.5195,
+    "lon": 37.07607
   },
   {
     "id": "syria",
@@ -93,7 +115,9 @@
     "country": "Syria",
     "role": "origin",
     "terminal_type": null,
-    "description": "Syria (unspecified) — origin"
+    "description": "Syria (unspecified) — origin",
+    "lat": 34.64019,
+    "lon": 39.04941
   },
   {
     "id": "idlib",
@@ -101,7 +125,9 @@
     "country": "Syria",
     "role": "transit",
     "terminal_type": null,
-    "description": "Idlib — transit"
+    "description": "Idlib — transit",
+    "lat": 35.87023,
+    "lon": 36.54818
   },
   {
     "id": "manbij",
@@ -109,7 +135,9 @@
     "country": "Syria",
     "role": "transit",
     "terminal_type": null,
-    "description": "Manbij — transit"
+    "description": "Manbij — transit",
+    "lat": 36.52692,
+    "lon": 37.95593
   },
   {
     "id": "raqqa",
@@ -117,7 +145,9 @@
     "country": "Syria",
     "role": "detention",
     "terminal_type": null,
-    "description": "Raqqa — detention"
+    "description": "Raqqa — detention",
+    "lat": 35.94968,
+    "lon": 39.00892
   },
   {
     "id": "syria_turkey_border",
@@ -125,7 +155,9 @@
     "country": "Syria",
     "role": "border",
     "terminal_type": null,
-    "description": "Syria-Turkey border — border"
+    "description": "Syria-Turkey border — border",
+    "lat": 36.22855,
+    "lon": 36.7107
   },
   {
     "id": "dubai",
@@ -133,7 +165,9 @@
     "country": "UAE",
     "role": "transit",
     "terminal_type": null,
-    "description": "Dubai — transit"
+    "description": "Dubai — transit",
+    "lat": 25.07428,
+    "lon": 55.18856
   },
   {
     "id": "jordan",
@@ -141,7 +175,9 @@
     "country": "Jordan",
     "role": "transit",
     "terminal_type": null,
-    "description": "Jordan — transit"
+    "description": "Jordan — transit",
+    "lat": 31.1667,
+    "lon": 36.94163
   },
   {
     "id": "zaatari",
@@ -149,7 +185,9 @@
     "country": "Jordan",
     "role": "camp",
     "terminal_type": null,
-    "description": "Zaatari camp — camp"
+    "description": "Zaatari camp — camp",
+    "lat": 32.29424,
+    "lon": 36.32674
   },
   {
     "id": "sudan",
@@ -157,7 +195,9 @@
     "country": "Sudan",
     "role": "transit",
     "terminal_type": null,
-    "description": "Sudan — transit"
+    "description": "Sudan — transit",
+    "lat": 14.58444,
+    "lon": 29.49177
   },
   {
     "id": "egypt",
@@ -165,7 +205,9 @@
     "country": "Egypt",
     "role": "transit",
     "terminal_type": null,
-    "description": "Egypt — transit"
+    "description": "Egypt — transit",
+    "lat": 26.25405,
+    "lon": 29.26755
   },
   {
     "id": "libya",
@@ -173,7 +215,9 @@
     "country": "Libya",
     "role": "transit",
     "terminal_type": null,
-    "description": "Libya — transit"
+    "description": "Libya — transit",
+    "lat": 26.82345,
+    "lon": 18.12367
   },
   {
     "id": "libya_detention",
@@ -181,7 +225,9 @@
     "country": "Libya",
     "role": "detention",
     "terminal_type": null,
-    "description": "Libya (detention centers) — detention"
+    "description": "Libya (detention centers) — detention",
+    "lat": 32.89667,
+    "lon": 13.17779
   },
   {
     "id": "italy",
@@ -189,7 +235,9 @@
     "country": "Italy",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Italy — arrival"
+    "description": "Italy — arrival",
+    "lat": 35.51113,
+    "lon": 12.59629
   },
   {
     "id": "irbil",
@@ -197,7 +245,9 @@
     "country": "Iraq",
     "role": "transit",
     "terminal_type": null,
-    "description": "Irbil — transit"
+    "description": "Irbil — transit",
+    "lat": 36.19117,
+    "lon": 44.00941
   },
   {
     "id": "minsk",
@@ -205,7 +255,9 @@
     "country": "Belarus",
     "role": "transit",
     "terminal_type": null,
-    "description": "Minsk — transit"
+    "description": "Minsk — transit",
+    "lat": 53.90247,
+    "lon": 27.56182
   },
   {
     "id": "poland",
@@ -213,7 +265,9 @@
     "country": "Poland",
     "role": "border",
     "terminal_type": null,
-    "description": "Poland — border"
+    "description": "Poland — border",
+    "lat": 52.07652,
+    "lon": 23.62223
   },
   {
     "id": "istanbul",
@@ -221,7 +275,9 @@
     "country": "Turkey",
     "role": "transit",
     "terminal_type": null,
-    "description": "Istanbul — transit"
+    "description": "Istanbul — transit",
+    "lat": 41.00638,
+    "lon": 28.97587
   },
   {
     "id": "izmir",
@@ -229,7 +285,9 @@
     "country": "Turkey",
     "role": "transit",
     "terminal_type": null,
-    "description": "Izmir — transit"
+    "description": "Izmir — transit",
+    "lat": 38.41925,
+    "lon": 27.12847
   },
   {
     "id": "antakya",
@@ -237,7 +295,9 @@
     "country": "Turkey",
     "role": "transit",
     "terminal_type": null,
-    "description": "Antakya (Hatay) — transit"
+    "description": "Antakya (Hatay) — transit",
+    "lat": 36.20256,
+    "lon": 36.1641
   },
   {
     "id": "didim",
@@ -245,7 +305,9 @@
     "country": "Turkey",
     "role": "transit",
     "terminal_type": null,
-    "description": "Didim — transit"
+    "description": "Didim — transit",
+    "lat": 37.36969,
+    "lon": 27.26848
   },
   {
     "id": "bodrum",
@@ -253,7 +315,9 @@
     "country": "Turkey",
     "role": "transit",
     "terminal_type": null,
-    "description": "Bodrum — transit"
+    "description": "Bodrum — transit",
+    "lat": 37.0344,
+    "lon": 27.43065
   },
   {
     "id": "gaziantep",
@@ -261,7 +325,9 @@
     "country": "Turkey",
     "role": "transit",
     "terminal_type": null,
-    "description": "Gaziantep — transit"
+    "description": "Gaziantep — transit",
+    "lat": 37.06283,
+    "lon": 37.37926
   },
   {
     "id": "urfa",
@@ -269,7 +335,9 @@
     "country": "Turkey",
     "role": "transit",
     "terminal_type": null,
-    "description": "Urfa — transit"
+    "description": "Urfa — transit",
+    "lat": 37.25952,
+    "lon": 39.04082
   },
   {
     "id": "turkey",
@@ -277,7 +345,9 @@
     "country": "Turkey",
     "role": "transit",
     "terminal_type": null,
-    "description": "Turkey (unspecified) — transit"
+    "description": "Turkey (unspecified) — transit",
+    "lat": 39.29408,
+    "lon": 35.23166
   },
   {
     "id": "aegean_sea",
@@ -285,7 +355,9 @@
     "country": "Aegean Sea",
     "role": "sea_crossing",
     "terminal_type": null,
-    "description": "Aegean Sea — sea_crossing"
+    "description": "Aegean Sea — sea_crossing",
+    "lat": 38.06223,
+    "lon": 25.72059
   },
   {
     "id": "lesbos",
@@ -293,7 +365,9 @@
     "country": "Greece",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Lesbos — arrival"
+    "description": "Lesbos — arrival",
+    "lat": 39.17584,
+    "lon": 25.99891
   },
   {
     "id": "kos",
@@ -301,7 +375,9 @@
     "country": "Greece",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Kos — arrival"
+    "description": "Kos — arrival",
+    "lat": 36.79369,
+    "lon": 27.08483
   },
   {
     "id": "samos",
@@ -309,7 +385,9 @@
     "country": "Greece",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Samos — arrival"
+    "description": "Samos — arrival",
+    "lat": 37.72462,
+    "lon": 26.81929
   },
   {
     "id": "agathonissi",
@@ -317,7 +395,9 @@
     "country": "Greece",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Agathonissi — arrival"
+    "description": "Agathonissi — arrival",
+    "lat": 37.46046,
+    "lon": 26.96767
   },
   {
     "id": "farmakonisi",
@@ -325,7 +405,9 @@
     "country": "Greece",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Farmakonisi — arrival"
+    "description": "Farmakonisi — arrival",
+    "lat": 37.29116,
+    "lon": 27.0857
   },
   {
     "id": "leros",
@@ -333,7 +415,9 @@
     "country": "Greece",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Leros — arrival"
+    "description": "Leros — arrival",
+    "lat": 37.00793,
+    "lon": 26.46759
   },
   {
     "id": "nera",
@@ -341,7 +425,9 @@
     "country": "Greece",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Nera — arrival"
+    "description": "Nera — arrival",
+    "lat": 37.47645,
+    "lon": 26.99284
   },
   {
     "id": "greek_island",
@@ -349,7 +435,9 @@
     "country": "Greece",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Greek island (unspecified) — arrival"
+    "description": "Greek island (unspecified) — arrival",
+    "lat": 37.5,
+    "lon": 26.0
   },
   {
     "id": "athens",
@@ -357,7 +445,9 @@
     "country": "Greece",
     "role": "transit",
     "terminal_type": null,
-    "description": "Athens — transit"
+    "description": "Athens — transit",
+    "lat": 37.97556,
+    "lon": 23.73483
   },
   {
     "id": "thessaloniki",
@@ -365,7 +455,9 @@
     "country": "Greece",
     "role": "transit",
     "terminal_type": null,
-    "description": "Thessaloniki — transit"
+    "description": "Thessaloniki — transit",
+    "lat": 40.64032,
+    "lon": 22.93527
   },
   {
     "id": "macedonia",
@@ -373,7 +465,9 @@
     "country": "North Macedonia",
     "role": "transit",
     "terminal_type": null,
-    "description": "Macedonia — transit"
+    "description": "Macedonia — transit",
+    "lat": 41.61712,
+    "lon": 21.71684
   },
   {
     "id": "serbia_border",
@@ -381,7 +475,9 @@
     "country": "Serbia",
     "role": "border",
     "terminal_type": null,
-    "description": "Serbia border (Presevo) — border"
+    "description": "Serbia border (Presevo) — border",
+    "lat": 42.31014,
+    "lon": 21.64743
   },
   {
     "id": "serbia",
@@ -389,7 +485,9 @@
     "country": "Serbia",
     "role": "transit",
     "terminal_type": null,
-    "description": "Serbia — transit"
+    "description": "Serbia — transit",
+    "lat": 44.02432,
+    "lon": 21.07657
   },
   {
     "id": "belgrade",
@@ -397,7 +495,9 @@
     "country": "Serbia",
     "role": "transit",
     "terminal_type": null,
-    "description": "Belgrade — transit"
+    "description": "Belgrade — transit",
+    "lat": 44.81533,
+    "lon": 20.44566
   },
   {
     "id": "bulgaria",
@@ -405,7 +505,9 @@
     "country": "Bulgaria",
     "role": "transit",
     "terminal_type": null,
-    "description": "Bulgaria — transit"
+    "description": "Bulgaria — transit",
+    "lat": 42.6074,
+    "lon": 25.48566
   },
   {
     "id": "croatia",
@@ -413,7 +515,9 @@
     "country": "Croatia",
     "role": "transit",
     "terminal_type": null,
-    "description": "Croatia — transit"
+    "description": "Croatia — transit",
+    "lat": 45.36584,
+    "lon": 15.65752
   },
   {
     "id": "slovenia",
@@ -421,7 +525,9 @@
     "country": "Slovenia",
     "role": "transit",
     "terminal_type": null,
-    "description": "Slovenia — transit"
+    "description": "Slovenia — transit",
+    "lat": 46.11994,
+    "lon": 14.81533
   },
   {
     "id": "hungary_border",
@@ -429,7 +535,9 @@
     "country": "Hungary",
     "role": "border",
     "terminal_type": null,
-    "description": "Hungary border — border"
+    "description": "Hungary border — border",
+    "lat": 46.18724,
+    "lon": 20.0355
   },
   {
     "id": "hungary",
@@ -437,7 +545,9 @@
     "country": "Hungary",
     "role": "transit",
     "terminal_type": null,
-    "description": "Hungary — transit"
+    "description": "Hungary — transit",
+    "lat": 47.18176,
+    "lon": 19.50609
   },
   {
     "id": "budapest",
@@ -445,7 +555,9 @@
     "country": "Hungary",
     "role": "transit",
     "terminal_type": null,
-    "description": "Budapest — transit"
+    "description": "Budapest — transit",
+    "lat": 47.49788,
+    "lon": 19.04024
   },
   {
     "id": "austria",
@@ -453,7 +565,9 @@
     "country": "Austria",
     "role": "transit",
     "terminal_type": null,
-    "description": "Austria — transit"
+    "description": "Austria — transit",
+    "lat": 47.59397,
+    "lon": 14.12456
   },
   {
     "id": "vienna",
@@ -461,7 +575,9 @@
     "country": "Austria",
     "role": "transit",
     "terminal_type": null,
-    "description": "Vienna — transit"
+    "description": "Vienna — transit",
+    "lat": 48.20835,
+    "lon": 16.3725
   },
   {
     "id": "germany_border",
@@ -469,7 +585,9 @@
     "country": "Germany",
     "role": "border",
     "terminal_type": null,
-    "description": "Germany border — border"
+    "description": "Germany border — border",
+    "lat": 48.57482,
+    "lon": 13.46097
   },
   {
     "id": "munich",
@@ -477,7 +595,9 @@
     "country": "Germany",
     "role": "arrival",
     "terminal_type": null,
-    "description": "Munich — arrival"
+    "description": "Munich — arrival",
+    "lat": 48.13711,
+    "lon": 11.57538
   },
   {
     "id": "germany_arrived",
@@ -485,7 +605,9 @@
     "country": "Germany",
     "role": "terminal",
     "terminal_type": "arrived_granted",
-    "description": "Germany (arrived, asylum granted/tolerated) — terminal"
+    "description": "Germany (arrived, asylum granted/tolerated) — terminal",
+    "lat": 52.51739,
+    "lon": 13.39513
   },
   {
     "id": "germany_rejected",
@@ -493,7 +615,9 @@
     "country": "Germany",
     "role": "terminal",
     "terminal_type": "arrived_rejected",
-    "description": "Germany (asylum rejected) — terminal"
+    "description": "Germany (asylum rejected) — terminal",
+    "lat": 50.11064,
+    "lon": 8.68209
   },
   {
     "id": "death_aegean",
@@ -501,7 +625,9 @@
     "country": "Aegean Sea",
     "role": "terminal",
     "terminal_type": "death",
-    "description": "Died in the Aegean (drowning) — terminal"
+    "description": "Died in the Aegean (drowning) — terminal",
+    "lat": 37.8,
+    "lon": 25.3
   },
   {
     "id": "death_truck",
@@ -509,7 +635,9 @@
     "country": "Austria",
     "role": "terminal",
     "terminal_type": "death",
-    "description": "Died in a smuggler's truck (suffocation) — terminal"
+    "description": "Died in a smuggler's truck (suffocation) — terminal",
+    "lat": 47.9974,
+    "lon": 16.86083
   },
   {
     "id": "prison_libya",
@@ -517,7 +645,9 @@
     "country": "Libya",
     "role": "terminal",
     "terminal_type": "prison",
-    "description": "Libyan prison / detention — terminal"
+    "description": "Libyan prison / detention — terminal",
+    "lat": 32.7,
+    "lon": 12.9
   },
   {
     "id": "returned_turkey",
@@ -525,7 +655,9 @@
     "country": "Turkey",
     "role": "terminal",
     "terminal_type": "returned",
-    "description": "Forcibly returned to Turkey — terminal"
+    "description": "Forcibly returned to Turkey — terminal",
+    "lat": 39.07497,
+    "lon": 26.88925
   },
   {
     "id": "stuck_lesbos",
@@ -533,7 +665,9 @@
     "country": "Greece",
     "role": "terminal",
     "terminal_type": "stuck",
-    "description": "Stuck in Lesbos — terminal"
+    "description": "Stuck in Lesbos — terminal",
+    "lat": 39.13214,
+    "lon": 26.51698
   },
   {
     "id": "rescued_sea",
@@ -541,6 +675,8 @@
     "country": "Mediterranean Sea",
     "role": "terminal",
     "terminal_type": "other",
-    "description": "Rescued at sea — terminal"
+    "description": "Rescued at sea — terminal",
+    "lat": 35.0,
+    "lon": 20.0
   }
 ]

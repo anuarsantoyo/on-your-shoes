@@ -73,9 +73,9 @@ def node_label(node_id):
 
 def all_nodes():
     c = _conn()
-    rows = c.execute("SELECT id, place, country, role, terminal_type FROM nodes").fetchall()
+    rows = c.execute("SELECT id, place, country, role, terminal_type, lat, lon FROM nodes").fetchall()
     c.close()
-    return [dict(id=r[0], place=r[1], country=r[2], role=r[3], terminal_type=r[4]) for r in rows]
+    return [dict(id=r[0], place=r[1], country=r[2], role=r[3], terminal_type=r[4], lat=r[5], lon=r[6]) for r in rows]
 
 
 def all_edges():
